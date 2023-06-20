@@ -1,6 +1,6 @@
 # LOG
 
-![Logotipo Markdown](doc/img/log.png)
+![Colored Logger](doc/img/log.png)
 
 My personal debug library for my C/C++ programers
 
