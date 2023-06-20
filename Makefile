@@ -68,9 +68,7 @@ test: all
 distclean: clean
 	rm -rvf *.log
 	rm -rvf $(LIBDIR)
-	rm -rvf $(BINDIR)/trace
-	rm -rvf $(BINDIR)/debug
-	rm -rvf $(BINDIR)/colored
+	rm -rvf $(BINDIR)
 	
 .PHONY: all clean debug install uninstall test check dist distclean
 
