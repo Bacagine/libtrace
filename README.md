@@ -1,5 +1,7 @@
 # LOG
 
+![Logotipo Markdown](doc/img/log.png)
+
 My personal debug library for my C/C++ programers
 
 # How to use?
@@ -18,8 +20,11 @@ My personal debug library for my C/C++ programers
 Your application needs a .conf file, in this file you add the follow contents:
 
 ```shell
-LOG_LEVEL = 5 # 0 to 5
-COLORED_LOG_LEVEL = false # true or false
+# 0 to 5
+LOG_LEVEL = 5
+
+# true or false
+COLORED_LOG_LEVEL = false
 ```
 
 ## Build and Install
@@ -71,9 +76,9 @@ int main(int argc, char **argv)
   if(ERROR_LEVEL  ) vLogError("ERROR Message"    );
   if(FATAL_LEVEL  ) vLogFatal("FATAL Message"    );
   
-  if(DEBUG_LEVEL  ) vLogDebug("%s(argc=%p, argv=%p)", __func__, &argc, &argv);
-  
-  if(TRACE_LEVEL  ) vLogTrace("TRACE Message");
+  if(DEBUG_LEVEL  ) vLogDebug("argc = %d", argc);
+
+  if(TRACE_LEVEL  ) vLogTrace("%s(argc = %p, argv = %p)", __func__, &argc, &argv);
   
   if(INFO_LEVEL)
   {

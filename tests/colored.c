@@ -37,9 +37,9 @@ int main(int argc, char **argv)
   if(ERROR_LEVEL  ) vLogError("ERROR Message"    );
   if(FATAL_LEVEL  ) vLogFatal("FATAL Message"    );
   
-  if(DEBUG_LEVEL  ) vLogDebug("%s(argc=%p, argv=%p)", __func__, &argc, &argv);
-  
-  if(TRACE_LEVEL  ) vLogTrace("TRACE Message");
+  if(DEBUG_LEVEL  ) vLogDebug("argc = %d", argc);
+
+  if(TRACE_LEVEL  ) vLogTrace("%s(argc = %p, argv = %p)", __func__, &argc, &argv);
   
   if(INFO_LEVEL)
   {

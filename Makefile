@@ -5,20 +5,18 @@
 ## 
 ## This is the a Makefile to my personal logger C library
 ##
-## \author NAME <gustavo.bacagine@protonmail.com>
+## \author Gustavo Bacagine <gustavo.bacagine@protonmail.com>
 ##
-## \date: 2023-06-18 
+## \date: 2023-06-16
 ##
 
 TARGET     = liblog.so
 SRCDIR     = ./src
 INCDIR     = ./include/log
-MANDIR     = ./man
 OBJDIR     = ./obj
 LIBDIR     = ./lib
 BINDIR     = ./bin
 TESTDIR    = ./tests
-MAN        = $(MANDIR)/$(TARGET).1
 SRC        = $(wildcard $(SRCDIR)/*.c)
 OBJS       = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRC))
 LIB        = $(LIBDIR)/$(TARGET)
@@ -32,9 +30,6 @@ ifdef DEBUG_COMPILATION
 	CFLAGS += $(DEBUGFLAGS) 
 	LDFLAGS += $(DEBUGFLAGS)
 endif
-
-run: all
-	$(BIN)
 
 all: $(OBJDIR) $(LIBDIR) $(BINDIR) $(LIB)
 	
@@ -64,7 +59,7 @@ uninstall:
 	rm -r /usr/include/log
 	rm -r $(LIB) /usr/lib/$(TARGET)
 
-test: $(LIB)
+test: all
 	export LD_LIBRARY_PATH=LD_LIBRARY_PATH:$(CURDIR)/lib
 	$(CC) -o $(BINDIR)/trace $(TESTDIR)/trace.c  $(CFLAGS) $(LDFLAGS) -llog
 	$(CC) -o $(BINDIR)/debug $(TESTDIR)/debug.c  $(CFLAGS) $(LDFLAGS) -llog
