@@ -2,7 +2,7 @@
 
 ![Colored Logger](doc/img/log.png)
 
-My personal debug library for my C/C++ programers
+My personal debug library for my C/C++ programs
 
 # How to use?
 
