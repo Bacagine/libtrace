@@ -8,13 +8,24 @@
 #include <stdio.h>
 #include "log.h"
 
+#define UNUSED(X) (void) X
+
 int main(int argc, char **argv)
 {
   int iColoredLogLevel;
   
+  UNUSED(argc);
+  UNUSED(argv);
+  UNUSED(gbColoredLogLevel);
+  UNUSED(gszLogFileName);
+  UNUSED(gszConfFileName);
+  UNUSED(kszLogLevelColorEnd);
+  UNUSED(kszLogLevelColorInit);
+  UNUSED(kszLogLevel);
+
   vSetConfFileName("log.conf");
-  
-  giDebugLevel = iGetLogLevel();
+
+  vSetLogLevel(iGetLogLevel());
 
   if(giDebugLevel < 0)
   {

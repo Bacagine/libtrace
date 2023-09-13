@@ -34,6 +34,11 @@ void vSetColoredLogLevel(bool bColored)
   gbColoredLogLevel = bColored;
 }
 
+void vSetLogLevel(DebugLevel usiDebugLevel)
+{
+  giDebugLevel = usiDebugLevel;
+}
+
 void vLogMessage(DebugLevel usiDebugLevel,
                  const char *kszModuleName,
                  const int kiLine, 

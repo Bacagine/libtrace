@@ -109,7 +109,7 @@ static char gszLogFileName[LOG_FILE_NAME_LENGTH];
  * Receive the level of debug from .conf 
  * file, the default is 0 (INFO)
  */
-static DebugLevel giDebugLevel = 0;
+DebugLevel giDebugLevel = 0;
 
 /**
  * Receive if the log level tag is colored 
@@ -133,6 +133,11 @@ void vSetLogFileName(const char *kszLogFileName);
  * colored and bold
  */
 void vSetColoredLogLevel(bool bColored);
+
+/**
+ * Set the value of giDebugLevel
+ */
+void vSetLogLevel(DebugLevel usiDebugLevel);
 
 /**
  * Get the log level from file.

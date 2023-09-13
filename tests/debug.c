@@ -11,6 +11,8 @@
 #include <stdint.h>
 #include "log.h"
 
+#define UNUSED(X) (void) X
+
 /* Structure that 
  * represents a person
  */
@@ -126,9 +128,18 @@ int main(int argc, char **argv)
 {
   PPerson pstPerson = (PPerson) malloc(sizeof(Person));
   
+  UNUSED(argc);
+  UNUSED(argv);
+  UNUSED(gbColoredLogLevel);
+  UNUSED(gszLogFileName);
+  UNUSED(gszConfFileName);
+  UNUSED(kszLogLevelColorEnd);
+  UNUSED(kszLogLevelColorInit);
+  UNUSED(kszLogLevel);
+  
   vSetConfFileName("log.conf");
   
-  giDebugLevel = iGetLogLevel();
+  vSetLogLevel(iGetLogLevel());
 
   if(giDebugLevel < 0)
   {

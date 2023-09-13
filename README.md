@@ -47,17 +47,24 @@ $ make
 #include <stdio.h>
 #include "log.h"
 
+#define UNUSED(X) (void) X
+
 int main(int argc, char **argv)
 {
-  int iColoredLogLevel = iGetColorLogLevel("log.conf");
+  int iColoredLogLevel;
+  
+  UNUSED(argc);
+  UNUSED(argv);
+  UNUSED(gbColoredLogLevel);
+  UNUSED(gszLogFileName);
+  UNUSED(gszConfFileName);
+  UNUSED(kszLogLevelColorEnd);
+  UNUSED(kszLogLevelColorInit);
+  UNUSED(kszLogLevel);
 
-  if(iColoredLogLevel == 0 || iColoredLogLevel == 1)
-  {
-    vSetColoredLogLevel(iColoredLogLevel);
-  }
+  vSetConfFileName("log.conf");
 
-  vSetLogFileName("colored.log");
-  giDebugLevel = iGetLogLevel("log.conf");
+  vSetLogLevel(iGetLogLevel());
 
   if(giDebugLevel < 0)
   {
@@ -66,6 +73,15 @@ int main(int argc, char **argv)
     exit(EXIT_FAILURE);
   }
   
+  iColoredLogLevel = iGetColoredLogLevel();
+  
+  if(iColoredLogLevel == 0 || iColoredLogLevel == 1)
+  {
+    vSetColoredLogLevel(iColoredLogLevel);
+  }
+  
+  vSetLogFileName("colored.log");
+ 
   if(INFO_LEVEL)
   {
     vLogInfo("start %s function", __func__);
@@ -87,6 +103,7 @@ int main(int argc, char **argv)
 
   return 0;
 }
+
 ```
 
 ### Example 2 debug.c
@@ -104,6 +121,8 @@ int main(int argc, char **argv)
 #include <string.h>
 #include <stdint.h>
 #include "log.h"
+
+#define UNUSED(X) (void) X
 
 /* Structure that 
  * represents a person
@@ -220,8 +239,18 @@ int main(int argc, char **argv)
 {
   PPerson pstPerson = (PPerson) malloc(sizeof(Person));
   
-  vSetLogFileName("debug.log");
-  giDebugLevel = iGetLogLevel("log.conf");
+  UNUSED(argc);
+  UNUSED(argv);
+  UNUSED(gbColoredLogLevel);
+  UNUSED(gszLogFileName);
+  UNUSED(gszConfFileName);
+  UNUSED(kszLogLevelColorEnd);
+  UNUSED(kszLogLevelColorInit);
+  UNUSED(kszLogLevel);
+  
+  vSetConfFileName("log.conf");
+  
+  vSetLogLevel(iGetLogLevel());
 
   if(giDebugLevel < 0)
   {
@@ -229,7 +258,9 @@ int main(int argc, char **argv)
 
     exit(EXIT_FAILURE);
   }
-
+  
+  vSetLogFileName("debug.log");
+  
   /* Initial log messages */
   if(INFO_LEVEL)
   {
@@ -260,6 +291,7 @@ int main(int argc, char **argv)
 
   return 0;
 }
+
 ```
 
 ### Example 3 - trace.c
@@ -275,12 +307,22 @@ int main(int argc, char **argv)
 #include <stdio.h>
 #include "log.h"
 
+#define UNUSED(X) (void) X
+
 int main(int argc, char **argv, char **envp)
 {
   int ii;
   
-  vSetLogFileName("trace.log");
-  giDebugLevel = iGetLogLevel("log.conf");
+  UNUSED(gbColoredLogLevel);
+  UNUSED(gszLogFileName);
+  UNUSED(gszConfFileName);
+  UNUSED(kszLogLevelColorEnd);
+  UNUSED(kszLogLevelColorInit);
+  UNUSED(kszLogLevel);
+
+  vSetConfFileName("log.conf");
+
+  vSetLogLevel(iGetLogLevel());
 
   if(giDebugLevel < 0)
   {
@@ -289,6 +331,8 @@ int main(int argc, char **argv, char **envp)
     exit(EXIT_FAILURE);
   }
   
+  vSetLogFileName("trace.log");
+
   if(INFO_LEVEL)
   {
     vLogInfo("start %s function", __func__);
