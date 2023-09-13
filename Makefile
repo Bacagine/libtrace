@@ -11,12 +11,12 @@
 ##
 
 TARGET     = liblog.so
-SRCDIR     = ./src
-INCDIR     = ./include/log
-OBJDIR     = ./obj
-LIBDIR     = ./lib
-BINDIR     = ./bin
-TESTDIR    = ./tests
+SRCDIR     = src
+INCDIR     = include/log
+OBJDIR     = obj
+LIBDIR     = lib
+BINDIR     = bin
+TESTDIR    = tests
 SRC        = $(wildcard $(SRCDIR)/*.c)
 OBJS       = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRC))
 LIB        = $(LIBDIR)/$(TARGET)
@@ -60,7 +60,6 @@ uninstall:
 	rm -r $(LIB) /usr/lib/$(TARGET)
 
 test: all
-	export LD_LIBRARY_PATH=LD_LIBRARY_PATH:$(CURDIR)/lib
 	$(CC) -o $(BINDIR)/trace $(TESTDIR)/trace.c  $(CFLAGS) $(LDFLAGS) -llog
 	$(CC) -o $(BINDIR)/debug $(TESTDIR)/debug.c  $(CFLAGS) $(LDFLAGS) -llog
 	$(CC) -o $(BINDIR)/colored $(TESTDIR)/colored.c  $(CFLAGS) $(LDFLAGS) -llog

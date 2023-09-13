@@ -7,7 +7,18 @@
 
 #include "log.h"
 
-void vSetLogFileName(char *kszLogFileName)
+void vSetConfFileName(const char *kszConfFileName)
+{
+  if(sizeof(kszConfFileName) > sizeof(gszConfFileName))
+  {
+    fprintf(stderr, "E: The name of configuraation file is bigger than %d", CONF_FILE_NAME_LENGTH);
+    exit(EXIT_FAILURE);
+  }
+  
+  sprintf(gszConfFileName, "%s", kszConfFileName); 
+}
+
+void vSetLogFileName(const char *kszLogFileName)
 {
   if(sizeof(kszLogFileName) > sizeof(gszLogFileName))
   {
@@ -20,7 +31,7 @@ void vSetLogFileName(char *kszLogFileName)
 
 void vSetColoredLogLevel(bool bColored)
 {
-  gbColorLogLevel = bColored;
+  gbColoredLogLevel = bColored;
 }
 
 void vLogMessage(DebugLevel usiDebugLevel,
@@ -49,7 +60,7 @@ void vLogMessage(DebugLevel usiDebugLevel,
   switch(usiDebugLevel)
   {
     case INFO:
-      if(gbColorLogLevel)
+      if(gbColoredLogLevel)
       {
         char szLogLevel[22];
         
@@ -90,7 +101,7 @@ void vLogMessage(DebugLevel usiDebugLevel,
       vfprintf(fpLogFile, szDbg, args);
       break;
     case WARNING:
-      if(gbColorLogLevel)
+      if(gbColoredLogLevel)
       {
         char szLogLevel[25];
         
@@ -130,7 +141,7 @@ void vLogMessage(DebugLevel usiDebugLevel,
       vfprintf(fpLogFile, szDbg, args);
       break;
     case ERROR:
-      if(gbColorLogLevel)
+      if(gbColoredLogLevel)
       {
         char szLogLevel[23];
         
@@ -171,7 +182,7 @@ void vLogMessage(DebugLevel usiDebugLevel,
       vfprintf(fpLogFile, szDbg, args);
       break;
     case FATAL:
-      if(gbColorLogLevel)
+      if(gbColoredLogLevel)
       {
         char szLogLevel[23];
         
@@ -212,7 +223,7 @@ void vLogMessage(DebugLevel usiDebugLevel,
       vfprintf(fpLogFile, szDbg, args);
       break;
     case DEBUG:
-      if(gbColorLogLevel)
+      if(gbColoredLogLevel)
       {
         char szLogLevel[23];
         
@@ -253,7 +264,7 @@ void vLogMessage(DebugLevel usiDebugLevel,
       vfprintf(fpLogFile, szDbg, args);
       break;
     case TRACE:
-      if(gbColorLogLevel)
+      if(gbColoredLogLevel)
       {
         char szLogLevel[23];
         
@@ -303,7 +314,7 @@ void vLogMessage(DebugLevel usiDebugLevel,
   fpLogFile = NULL;
 }
 
-int iGetLogLevel(const char *kszLogConfFileName)
+int iGetLogLevel(void)
 {
   FILE *fpLogConfFile = NULL;
   int iDebugLevel = -1;
@@ -322,9 +333,9 @@ int iGetLogLevel(const char *kszLogConfFileName)
   memset(szLevel, 0, sizeof(szLevel));
 
   /* Try open .conf file */
-  if((fpLogConfFile = fopen(kszLogConfFileName, "r")) == NULL)
+  if((fpLogConfFile = fopen(gszConfFileName, "r")) == NULL)
   {
-    fprintf(stderr, "E: %s %s\n", kszLogConfFileName, strerror(errno));
+    fprintf(stderr, "E: %s %s\n", gszConfFileName, strerror(errno));
 
     return -1;
   }
@@ -350,7 +361,7 @@ int iGetLogLevel(const char *kszLogConfFileName)
           /* Verify if have a value after '=' symbol */
           if(!strcmp(pToken, "") || !strcmp(pToken, " ") || !strcmp(pToken, "\n"))
           {
-            fprintf(stderr, "E: LOG_LEVEL is empty in file %s!\n", kszLogConfFileName);
+            fprintf(stderr, "E: LOG_LEVEL is empty in file %s!\n", gszConfFileName);
             
             fclose(fpLogConfFile);
             fpLogConfFile = NULL;
@@ -381,7 +392,7 @@ int iGetLogLevel(const char *kszLogConfFileName)
    * message to user */
   if(bFoundLogLevel == false)
   {
-    fprintf(stderr, "E: Not found variable LOG_LEVEL in file %s!\n", kszLogConfFileName);
+    fprintf(stderr, "E: Not found variable LOG_LEVEL in file %s!\n", gszConfFileName);
         
     fclose(fpLogConfFile);
     fpLogConfFile = NULL;
@@ -392,7 +403,7 @@ int iGetLogLevel(const char *kszLogConfFileName)
   /* If LOG_LEVEL in file is incorret */
   if(iDebugLevel < 0 || iDebugLevel > 5)
   {
-    fprintf(stderr, "E: Invalid value of log level in file %s!\n", kszLogConfFileName);
+    fprintf(stderr, "E: Invalid value of log level in file %s!\n", gszConfFileName);
         
     fclose(fpLogConfFile);
     fpLogConfFile = NULL;
@@ -406,7 +417,7 @@ int iGetLogLevel(const char *kszLogConfFileName)
   return iDebugLevel;
 }
 
-int iGetColorLogLevel(const char *kszLogConfFileName)
+int iGetColoredLogLevel(void)
 {
   FILE *fpLogConfFile = NULL;
   char szLine[256];
@@ -425,9 +436,9 @@ int iGetColorLogLevel(const char *kszLogConfFileName)
   memset(szBool, 0, sizeof(szBool));
 
   /* Try open .conf file */
-  if((fpLogConfFile = fopen(kszLogConfFileName, "r")) == NULL)
+  if((fpLogConfFile = fopen(gszConfFileName, "r")) == NULL)
   {
-    fprintf(stderr, "E: %s %s\n", kszLogConfFileName, strerror(errno));
+    fprintf(stderr, "E: %s %s\n", gszConfFileName, strerror(errno));
 
     return -1;
   }
@@ -453,7 +464,7 @@ int iGetColorLogLevel(const char *kszLogConfFileName)
           /* Verify if have a value after '=' symbol */
           if(!strcmp(pToken, "") || !strcmp(pToken, " ") || !strcmp(pToken, "\n"))
           {
-            fprintf(stderr, "E: COLORED_LOG_LEVEL is empty in file %s!\n", kszLogConfFileName);
+            fprintf(stderr, "E: COLORED_LOG_LEVEL is empty in file %s!\n", gszConfFileName);
             
             fclose(fpLogConfFile);
             fpLogConfFile = NULL;
@@ -484,7 +495,7 @@ int iGetColorLogLevel(const char *kszLogConfFileName)
    * message to user */
   if(bFoundColoredLogLevel == false)
   {
-    fprintf(stderr, "E: Not found variable COLORED_LOG_LEVEL in file %s!\n", kszLogConfFileName);
+    fprintf(stderr, "E: Not found variable COLORED_LOG_LEVEL in file %s!\n", gszConfFileName);
         
     fclose(fpLogConfFile);
     fpLogConfFile = NULL;
@@ -503,7 +514,7 @@ int iGetColorLogLevel(const char *kszLogConfFileName)
   }
   else
   {
-    fprintf(stderr, "E: Invalid value of colored log level in file %s!\n", kszLogConfFileName);
+    fprintf(stderr, "E: Invalid value of colored log level in file %s!\n", gszConfFileName);
 
     iReturnValue = -4;
   }

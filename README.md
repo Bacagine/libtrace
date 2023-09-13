@@ -337,8 +337,15 @@ gcc -o debug debug.c -llog
 gcc -o trace trace.c -llog
 ```
 
+OBS: if you would like to test without installing, make sure to run the following command in your terminal:
+
+```
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib
+```
+
 ### Uninstall
 
 ```
 make uninstall
 ```
+

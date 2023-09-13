@@ -126,8 +126,9 @@ int main(int argc, char **argv)
 {
   PPerson pstPerson = (PPerson) malloc(sizeof(Person));
   
-  vSetLogFileName("debug.log");
-  giDebugLevel = iGetLogLevel("log.conf");
+  vSetConfFileName("log.conf");
+  
+  giDebugLevel = iGetLogLevel();
 
   if(giDebugLevel < 0)
   {
@@ -135,7 +136,9 @@ int main(int argc, char **argv)
 
     exit(EXIT_FAILURE);
   }
-
+  
+  vSetLogFileName("debug.log");
+  
   /* Initial log messages */
   if(INFO_LEVEL)
   {

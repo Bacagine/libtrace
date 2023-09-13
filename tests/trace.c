@@ -12,8 +12,9 @@ int main(int argc, char **argv, char **envp)
 {
   int ii;
 
-  vSetLogFileName("trace.log");
-  giDebugLevel = iGetLogLevel("log.conf");
+  vSetConfFileName("log.conf");
+
+  giDebugLevel = iGetLogLevel();
 
   if(giDebugLevel < 0)
   {
@@ -22,6 +23,8 @@ int main(int argc, char **argv, char **envp)
     exit(EXIT_FAILURE);
   }
   
+  vSetLogFileName("trace.log");
+
   if(INFO_LEVEL)
   {
     vLogInfo("start %s function", __func__);

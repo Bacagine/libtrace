@@ -10,15 +10,11 @@
 
 int main(int argc, char **argv)
 {
-  int iColoredLogLevel = iGetColorLogLevel("log.conf");
-
-  if(iColoredLogLevel == 0 || iColoredLogLevel == 1)
-  {
-    vSetColoredLogLevel(iColoredLogLevel);
-  }
-
-  vSetLogFileName("colored.log");
-  giDebugLevel = iGetLogLevel("log.conf");
+  int iColoredLogLevel;
+  
+  vSetConfFileName("log.conf");
+  
+  giDebugLevel = iGetLogLevel();
 
   if(giDebugLevel < 0)
   {
@@ -27,6 +23,15 @@ int main(int argc, char **argv)
     exit(EXIT_FAILURE);
   }
   
+  iColoredLogLevel = iGetColoredLogLevel();
+  
+  if(iColoredLogLevel == 0 || iColoredLogLevel == 1)
+  {
+    vSetColoredLogLevel(iColoredLogLevel);
+  }
+  
+  vSetLogFileName("colored.log");
+ 
   if(INFO_LEVEL)
   {
     vLogInfo("start %s function", __func__);

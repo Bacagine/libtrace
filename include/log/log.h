@@ -17,7 +17,8 @@
 #include <time.h>
 #include <errno.h>
 
-#define LOG_FILE_NAME_LENGTH 2048
+#define CONF_FILE_NAME_LENGTH 256
+#define LOG_FILE_NAME_LENGTH  256
 
 #define INFO    0 /* Normal messages                                      */
 #define WARNING 1 /* Warning alert messages                               */
@@ -26,7 +27,7 @@
 #define DEBUG   4 /* Messages with more information about the source code */
 #define TRACE   5 /* Show all messages in log                             */
 
-/*
+/**
  * Example of use:
  *
  * if(INFO_LEVEL)
@@ -94,20 +95,47 @@ static const char *kszLogLevelColorEnd[] = {
   DEBUG_END_COLOR, TRACE_END_COLOR
 };
 
-static char gszLogFileName[LOG_FILE_NAME_LENGTH]; /* Receive the name of .log file                                                */
-static DebugLevel giDebugLevel = 0;               /* Receive the level of debug from .conf file, the default is 0 (INFO)          */
-static bool gbColorLogLevel = false;              /* Receive if the log level tag is colored or not, the default is without color */
+/**
+ * Receive the name of .conf file
+ */
+static char gszConfFileName[LOG_FILE_NAME_LENGTH];
 
-/* Set the name of log file */
-void vSetLogFileName(char *kszLogFileName);
+/**
+ * Receive the name of .log file
+ */
+static char gszLogFileName[LOG_FILE_NAME_LENGTH]; 
 
-/* 
+/**
+ * Receive the level of debug from .conf 
+ * file, the default is 0 (INFO)
+ */
+static DebugLevel giDebugLevel = 0;
+
+/**
+ * Receive if the log level tag is colored 
+ * or not, the default is without color
+ */
+static bool gbColoredLogLevel = false;
+
+/**
+ * Set the name of configure file of 
+ * the software
+ */
+void vSetConfFileName(const char *kszConfFile);
+
+/**
+ * Set the name of log file
+ */
+void vSetLogFileName(const char *kszLogFileName);
+
+/** 
  * Enable or disable log level with 
  * colored and bold
  */
 void vSetColoredLogLevel(bool bColored);
 
-/* Get the log level from file.
+/**
+ * Get the log level from file.
  * 
  * return values:
  * 0 - 6 = Log Level
@@ -116,9 +144,10 @@ void vSetColoredLogLevel(bool bColored);
  * -3 if don't found LOG_LEVEL variable in file
  * -4 if value of LOG_LEVEL is invalid
  */
-int iGetLogLevel(const char *kszLogConfFile);
+int iGetLogLevel(void);
 
-/* Get the colored log level from file.
+/**
+ * Get the colored log level from file.
  * 
  * return values:
  *  0 is fals, no color in log level
@@ -128,9 +157,11 @@ int iGetLogLevel(const char *kszLogConfFile);
  * -3 if don't found COLORED_LOG_LEVEL variable in file
  * -4 if value of COLORED_LOG_LEVEL is invalid
  */
-int iGetColorLogLevel(const char *kszLogConfFile);
+int iGetColoredLogLevel(void);
 
-/* Print a log message */
+/**
+ * Print a log message
+ */
 void vLogMessage(const DebugLevel usiDebugLevel,
                  const char *kszModuleName,
                  const int kiLine,
