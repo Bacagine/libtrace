@@ -1,4 +1,5 @@
-/* debug.c: Exemple of the DEBUG_LEVEL
+/**
+ * debug.c: Exemple of the DEBUG_LEVEL
  * 
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -13,7 +14,8 @@
 
 #define UNUSED(X) (void) X
 
-/* Structure that 
+/**
+ * Structure that 
  * represents a person
  */
 typedef struct Person

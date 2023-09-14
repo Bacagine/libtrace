@@ -1,4 +1,5 @@
-/* trace.c: Test to log library with TRACE_LEVEL
+/**
+ * trace.c: Test to log library with TRACE_LEVEL
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 

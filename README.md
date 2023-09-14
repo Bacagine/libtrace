@@ -37,7 +37,8 @@ $ make
 
 ### Example 1 - colored.c
 ```c
-/* colored.c: Test to log library, using colored log level
+/**
+ * colored.c: Test to log library, using colored log level
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -109,7 +110,8 @@ int main(int argc, char **argv)
 ### Example 2 debug.c
 
 ```c
-/* debug.c: Exemple of the DEBUG_LEVEL
+/**
+ * debug.c: Exemple of the DEBUG_LEVEL
  * 
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -124,7 +126,8 @@ int main(int argc, char **argv)
 
 #define UNUSED(X) (void) X
 
-/* Structure that 
+/**
+ * Structure that 
  * represents a person
  */
 typedef struct Person
@@ -297,7 +300,8 @@ int main(int argc, char **argv)
 ### Example 3 - trace.c
 
 ```c
-/* trace.c: Test to log library with TRACE_LEVEL
+/**
+ * trace.c: Test to log library with TRACE_LEVEL
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -372,24 +376,197 @@ int main(int argc, char **argv, char **envp)
 }
 
 ```
+### Example 4 - Modular programming
+
+```
+/**
+ * module1.c: Test to log library, using modular programming
+ *
+ * This file is module 1 of 2
+ *
+ * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
+ * 
+ * Date: 2023-09-14
+ */
+
+#include <stdio.h>
+#include "log.h"
+
+#define UNUSED(X) (void) X
+
+void vShowDebugLevel(void);
+void vShowColoredLogLevel(void);
+void vShowConfFileName(void);
+void vShowLogFileName(void);
+
+int main(int argc, char **argv)
+{
+  int iColoredLogLevel;
+ 
+  UNUSED(argc);
+  UNUSED(argv);
+  UNUSED(kszLogLevelColorEnd);
+  UNUSED(kszLogLevelColorInit);
+  UNUSED(kszLogLevel);
+ 
+  vSetConfFileName("log.conf");
+
+  vSetLogLevel(iGetLogLevel());
+
+  if(giDebugLevel < 0)
+  {
+    fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
+
+    exit(EXIT_FAILURE);
+  }
+  
+  iColoredLogLevel = iGetColoredLogLevel();
+  
+  if(iColoredLogLevel == 0 || iColoredLogLevel == 1)
+  {
+    vSetColoredLogLevel(iColoredLogLevel);
+  }
+  
+  vSetLogFileName("module.log"); 
+  
+  if(INFO_LEVEL)
+  {
+    vLogInfo("Start %s function", __func__);
+    vLogInfo("Debug Level = %d", giDebugLevel);
+    vLogInfo("Colored Log Level = %s", 
+      gbColoredLogLevel == true ? "true" : "false");
+    vLogInfo("Configure file: %s", gszConfFileName);
+    vLogInfo("Log file: %s", gszLogFileName);
+  }
+
+  vShowDebugLevel();
+  vShowColoredLogLevel();
+  vShowConfFileName();
+  vShowLogFileName();
+  
+  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+
+  return 0;
+}
+
+```
+
+```
+/**
+ * module2.c: Test to log library, using modular programming
+ *
+ * This file is module 2 of 2
+ *
+ * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
+ * 
+ * Date: 2023-09-14
+ */
+
+#include "log.h"
+
+#define UNUSED(X) (void) X
+
+void vShowDebugLevel(void)
+{
+  UNUSED(gbColoredLogLevel);
+  UNUSED(gszLogFileName);
+  UNUSED(gszConfFileName);
+  UNUSED(kszLogLevelColorEnd);
+  UNUSED(kszLogLevelColorInit);
+  UNUSED(kszLogLevel);
+  
+  if(INFO_LEVEL)
+  {
+    vLogInfo("Start %s function", __func__);
+    vLogInfo("Debug Level = %d", giDebugLevel);
+  }
+
+  printf("Debug Level = %d\n", giDebugLevel);
+
+  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+}
+
+void vShowColoredLogLevel(void)
+{
+  UNUSED(gszLogFileName);
+  UNUSED(gszConfFileName);
+  UNUSED(kszLogLevelColorEnd);
+  UNUSED(kszLogLevelColorInit);
+  UNUSED(kszLogLevel);
+  
+  if(INFO_LEVEL)
+  {
+    vLogInfo("Start %s function", __func__);
+    vLogInfo("Colored Log Level = %s", 
+      gbColoredLogLevel == true ? "true" : "false");
+  } 
+
+  printf("Colored Log Level = %s\n", 
+      gbColoredLogLevel == true ? "true" : "false");
+
+  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+}
+
+void vShowConfFileName(void)
+{
+  UNUSED(gbColoredLogLevel);
+  UNUSED(gszLogFileName);
+  UNUSED(kszLogLevelColorEnd);
+  UNUSED(kszLogLevelColorInit);
+  UNUSED(kszLogLevel);
+  
+  if(INFO_LEVEL)
+  {
+    vLogInfo("Start %s function", __func__);
+    vLogInfo("Configure file: %s", gszConfFileName);
+  }
+
+  printf("Configure file: %s\n", gszConfFileName);
+
+  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+}
+
+void vShowLogFileName(void)
+{
+  UNUSED(gbColoredLogLevel);
+  UNUSED(gszConfFileName);
+  UNUSED(kszLogLevelColorEnd);
+  UNUSED(kszLogLevelColorInit);
+  UNUSED(kszLogLevel);
+  
+ if(INFO_LEVEL)
+  {
+    vLogInfo("Start %s function", __func__);
+    vLogInfo("Log file: %s", gszLogFileName);
+  }
+
+  printf("Log file: %s\n", gszLogFileName);
+
+  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+}
+
+```
 
 ### Compile the codes
 
 ```
-gcc -o colored colored.c -llog
-gcc -o debug debug.c -llog
-gcc -o trace trace.c -llog
+$ gcc -o colored colored.c -llog
+$ gcc -o debug debug.c -llog
+$ gcc -o trace trace.c -llog
+$ gcc -c module1.c -o module1.o -llog
+$ gcc -c module2.c -o module2.o -llog
+$ gcc -o module module1.o module2.o -llog
 ```
 
 OBS: if you would like to test without installing, make sure to run the following command in your terminal:
 
 ```
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib
+$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib
 ```
 
 ### Uninstall
 
 ```
-make uninstall
+# make uninstall
 ```
 

@@ -63,6 +63,9 @@ test: all
 	$(CC) -o $(BINDIR)/trace $(TESTDIR)/trace.c  $(CFLAGS) $(LDFLAGS) -llog
 	$(CC) -o $(BINDIR)/debug $(TESTDIR)/debug.c  $(CFLAGS) $(LDFLAGS) -llog
 	$(CC) -o $(BINDIR)/colored $(TESTDIR)/colored.c  $(CFLAGS) $(LDFLAGS) -llog
+	$(CC)	-c $(TESTDIR)/module1.c -o $(OBJDIR)/module1.o $(CFLAGS) $(LDFLAGS) -llog
+	$(CC)	-c $(TESTDIR)/module2.c -o $(OBJDIR)/module2.o $(CFLAGS) $(LDFLAGS) -llog
+	$(CC) -o $(BINDIR)/module $(OBJDIR)/module1.o $(OBJDIR)/module2.o $(CFLAGS) $(LDFLAGS) -llog
 	
 distclean: clean
 	rm -rvf *.log

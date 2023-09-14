@@ -7,6 +7,11 @@
 
 #include "log.h"
 
+char gszConfFileName[LOG_FILE_NAME_LENGTH];
+char gszLogFileName[LOG_FILE_NAME_LENGTH];
+DebugLevel giDebugLevel = 0;
+bool gbColoredLogLevel = false;
+
 void vSetConfFileName(const char *kszConfFileName)
 {
   if(sizeof(kszConfFileName) > sizeof(gszConfFileName))

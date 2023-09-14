@@ -98,24 +98,24 @@ static const char *kszLogLevelColorEnd[] = {
 /**
  * Receive the name of .conf file
  */
-static char gszConfFileName[LOG_FILE_NAME_LENGTH];
+extern char gszConfFileName[LOG_FILE_NAME_LENGTH];
 
 /**
  * Receive the name of .log file
  */
-static char gszLogFileName[LOG_FILE_NAME_LENGTH]; 
+extern char gszLogFileName[LOG_FILE_NAME_LENGTH]; 
 
 /**
  * Receive the level of debug from .conf 
  * file, the default is 0 (INFO)
  */
-DebugLevel giDebugLevel = 0;
+extern DebugLevel giDebugLevel;
 
 /**
  * Receive if the log level tag is colored 
  * or not, the default is without color
  */
-static bool gbColoredLogLevel = false;
+extern bool gbColoredLogLevel;
 
 /**
  * Set the name of configure file of 

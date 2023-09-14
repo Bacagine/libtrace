@@ -1,9 +1,11 @@
 /**
- * colored.c: Test to log library, using colored log level
+ * module1.c: Test to log library, using modular programming
+ *
+ * This file is module 1 of 2
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
- * Date: 2023-06-16
+ * Date: 2023-09-14
  */
 
 #include <stdio.h>
@@ -11,19 +13,21 @@
 
 #define UNUSED(X) (void) X
 
+void vShowDebugLevel(void);
+void vShowColoredLogLevel(void);
+void vShowConfFileName(void);
+void vShowLogFileName(void);
+
 int main(int argc, char **argv)
 {
   int iColoredLogLevel;
-  
+ 
   UNUSED(argc);
   UNUSED(argv);
-  UNUSED(gbColoredLogLevel);
-  UNUSED(gszLogFileName);
-  UNUSED(gszConfFileName);
   UNUSED(kszLogLevelColorEnd);
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
-
+ 
   vSetConfFileName("log.conf");
 
   vSetLogLevel(iGetLogLevel());
@@ -42,26 +46,24 @@ int main(int argc, char **argv)
     vSetColoredLogLevel(iColoredLogLevel);
   }
   
-  vSetLogFileName("colored.log");
+  vSetLogFileName("module.log"); 
   
   if(INFO_LEVEL)
   {
-    vLogInfo("start %s function", __func__);
-    vLogInfo("INFO Message"      );
+    vLogInfo("Start %s function", __func__);
+    vLogInfo("Debug Level = %d", giDebugLevel);
+    vLogInfo("Colored Log Level = %s", 
+      gbColoredLogLevel == true ? "true" : "false");
+    vLogInfo("Configure file: %s", gszConfFileName);
+    vLogInfo("Log file: %s", gszLogFileName);
   }
 
-  if(WARNING_LEVEL) vLogWarning("WARNING Message");
-  if(ERROR_LEVEL  ) vLogError("ERROR Message"    );
-  if(FATAL_LEVEL  ) vLogFatal("FATAL Message"    );
+  vShowDebugLevel();
+  vShowColoredLogLevel();
+  vShowConfFileName();
+  vShowLogFileName();
   
-  if(DEBUG_LEVEL  ) vLogDebug("argc = %d", argc);
-
-  if(TRACE_LEVEL  ) vLogTrace("%s(argc = %p, argv = %p)", __func__, &argc, &argv);
-  
-  if(INFO_LEVEL)
-  {
-    vLogInfo("End %s function", __func__);
-  }
+  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
 
   return 0;
 }
