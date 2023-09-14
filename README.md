@@ -378,7 +378,7 @@ int main(int argc, char **argv, char **envp)
 ```
 ### Example 4 - Modular programming
 
-```
+```c
 /**
  * module1.c: Test to log library, using modular programming
  *
@@ -451,7 +451,7 @@ int main(int argc, char **argv)
 
 ```
 
-```
+```c
 /**
  * module2.c: Test to log library, using modular programming
  *
