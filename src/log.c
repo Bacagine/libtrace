@@ -66,6 +66,16 @@ void vLogMessage(DebugLevel usiDebugLevel,
   }
   
   va_start(args, kszFmt);
+  
+  sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d", stTime->tm_year + 1900, 
+                                                        stTime->tm_mon + 1, 
+                                                        stTime->tm_mday,
+                                                        stTime->tm_hour,
+                                                        stTime->tm_min,
+                                                        stTime->tm_sec,
+                                                        kszModuleName,
+                                                        kiLine
+  );
 
   switch(usiDebugLevel)
   {
@@ -79,32 +89,22 @@ void vLogMessage(DebugLevel usiDebugLevel,
         strcat(szLogLevel, kszLogLevelColorInit[INFO]);
         strcat(szLogLevel, kszLogLevel[INFO]);
         strcat(szLogLevel, kszLogLevelColorEnd[INFO]);
+      
+        strcat(szDbg, " [");
+        strcat(szDbg, szLogLevel);
+        strcat(szDbg, "] ");
 
-        sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d [%s] ", stTime->tm_year + 1900, 
-                                                                    stTime->tm_mon + 1, 
-                                                                    stTime->tm_mday,
-                                                                    stTime->tm_hour,
-                                                                    stTime->tm_min,
-                                                                    stTime->tm_sec,
-                                                                    kszModuleName,
-                                                                    kiLine,
-                                                                    szLogLevel);
         strcat(szDbg, kszFmt);
         strcat(szDbg, "\n");
 
         vfprintf(fpLogFile, szDbg, args);
         break;
       }
+      
+      strcat(szDbg, " [");
+      strcat(szDbg, kszLogLevel[INFO]);
+      strcat(szDbg, "] ");
 
-      sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d [%s] ", stTime->tm_year + 1900, 
-                                                                  stTime->tm_mon + 1, 
-                                                                  stTime->tm_mday,
-                                                                  stTime->tm_hour,
-                                                                  stTime->tm_min,
-                                                                  stTime->tm_sec,
-                                                                  kszModuleName,
-                                                                  kiLine,
-                                                                  kszLogLevel[INFO]);
       strcat(szDbg, kszFmt);
       strcat(szDbg, "\n");
 
@@ -120,31 +120,22 @@ void vLogMessage(DebugLevel usiDebugLevel,
         strcat(szLogLevel, kszLogLevelColorInit[WARNING]);
         strcat(szLogLevel, kszLogLevel[WARNING]);
         strcat(szLogLevel, kszLogLevelColorEnd[WARNING]);
+   
+        strcat(szDbg, " [");     
+        strcat(szDbg, szLogLevel);
+        strcat(szDbg, "] ");
 
-        sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d [%s] ", stTime->tm_year + 1900, 
-                                                                    stTime->tm_mon + 1, 
-                                                                    stTime->tm_mday,
-                                                                    stTime->tm_hour,
-                                                                    stTime->tm_min,
-                                                                    stTime->tm_sec,
-                                                                    kszModuleName,
-                                                                    kiLine,
-                                                                    szLogLevel);
         strcat(szDbg, kszFmt);
         strcat(szDbg, "\n");
 
         vfprintf(fpLogFile, szDbg, args);
         break;
       }
-      sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d [%s] ", stTime->tm_year + 1900, 
-                                                                  stTime->tm_mon + 1, 
-                                                                  stTime->tm_mday,
-                                                                  stTime->tm_hour,
-                                                                  stTime->tm_min,
-                                                                  stTime->tm_sec,
-                                                                  kszModuleName,
-                                                                  kiLine,
-                                                                  kszLogLevel[WARNING]);
+
+      strcat(szDbg, " [");
+      strcat(szDbg, kszLogLevel[WARNING]);
+      strcat(szDbg, "] ");
+
       strcat(szDbg, kszFmt);
       strcat(szDbg, "\n");
 
@@ -161,15 +152,10 @@ void vLogMessage(DebugLevel usiDebugLevel,
         strcat(szLogLevel, kszLogLevel[ERROR]);
         strcat(szLogLevel, kszLogLevelColorEnd[ERROR]);
 
-        sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d [%s] ", stTime->tm_year + 1900, 
-                                                                    stTime->tm_mon + 1, 
-                                                                    stTime->tm_mday,
-                                                                    stTime->tm_hour,
-                                                                    stTime->tm_min,
-                                                                    stTime->tm_sec,
-                                                                    kszModuleName,
-                                                                    kiLine,
-                                                                    szLogLevel);
+        strcat(szDbg, " [");
+        strcat(szDbg, szLogLevel);
+        strcat(szDbg, "] ");
+
         strcat(szDbg, kszFmt);
         strcat(szDbg, "\n");
 
@@ -177,15 +163,10 @@ void vLogMessage(DebugLevel usiDebugLevel,
         break;
       }
 
-      sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d [%s] ", stTime->tm_year + 1900, 
-                                                                  stTime->tm_mon + 1, 
-                                                                  stTime->tm_mday,
-                                                                  stTime->tm_hour,
-                                                                  stTime->tm_min,
-                                                                  stTime->tm_sec,
-                                                                  kszModuleName,
-                                                                  kiLine,
-                                                                  kszLogLevel[ERROR]);
+      strcat(szDbg, " [");
+      strcat(szDbg, kszLogLevel[ERROR]);
+      strcat(szDbg, "] ");
+
       strcat(szDbg, kszFmt);
       strcat(szDbg, "\n");
 
@@ -202,15 +183,10 @@ void vLogMessage(DebugLevel usiDebugLevel,
         strcat(szLogLevel, kszLogLevel[FATAL]);
         strcat(szLogLevel, kszLogLevelColorEnd[FATAL]);
 
-        sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d [%s] ", stTime->tm_year + 1900, 
-                                                                    stTime->tm_mon + 1, 
-                                                                    stTime->tm_mday,
-                                                                    stTime->tm_hour,
-                                                                    stTime->tm_min,
-                                                                    stTime->tm_sec,
-                                                                    kszModuleName,
-                                                                    kiLine,
-                                                                    szLogLevel);
+        strcat(szDbg, " [");
+        strcat(szDbg, szLogLevel);
+        strcat(szDbg, "] ");
+
         strcat(szDbg, kszFmt);
         strcat(szDbg, "\n");
 
@@ -218,15 +194,10 @@ void vLogMessage(DebugLevel usiDebugLevel,
         break;
       }
 
-      sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d [%s] ", stTime->tm_year + 1900, 
-                                                                  stTime->tm_mon + 1, 
-                                                                  stTime->tm_mday,
-                                                                  stTime->tm_hour,
-                                                                  stTime->tm_min,
-                                                                  stTime->tm_sec,
-                                                                  kszModuleName,
-                                                                  kiLine,
-                                                                  kszLogLevel[FATAL]);
+      strcat(szDbg, " [");
+      strcat(szDbg, kszLogLevel[FATAL]);
+      strcat(szDbg, "] ");
+
       strcat(szDbg, kszFmt);
       strcat(szDbg, "\n");
 
@@ -243,15 +214,10 @@ void vLogMessage(DebugLevel usiDebugLevel,
         strcat(szLogLevel, kszLogLevel[DEBUG]);
         strcat(szLogLevel, kszLogLevelColorEnd[DEBUG]);
 
-        sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d [%s] ", stTime->tm_year + 1900, 
-                                                                    stTime->tm_mon + 1, 
-                                                                    stTime->tm_mday,
-                                                                    stTime->tm_hour,
-                                                                    stTime->tm_min,
-                                                                    stTime->tm_sec,
-                                                                    kszModuleName,
-                                                                    kiLine,
-                                                                    szLogLevel);
+        strcat(szDbg, " [");
+        strcat(szDbg, szLogLevel);
+        strcat(szDbg, "] ");
+
         strcat(szDbg, kszFmt);
         strcat(szDbg, "\n");
 
@@ -259,15 +225,10 @@ void vLogMessage(DebugLevel usiDebugLevel,
         break;
       }
 
-      sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d [%s] ", stTime->tm_year + 1900, 
-                                                                  stTime->tm_mon + 1, 
-                                                                  stTime->tm_mday,
-                                                                  stTime->tm_hour,
-                                                                  stTime->tm_min,
-                                                                  stTime->tm_sec,
-                                                                  kszModuleName,
-                                                                  kiLine,
-                                                                  kszLogLevel[DEBUG]);
+      strcat(szDbg, " [");
+      strcat(szDbg, kszLogLevel[DEBUG]);
+      strcat(szDbg, "] ");
+
       strcat(szDbg, kszFmt);
       strcat(szDbg, "\n");
 
@@ -284,15 +245,10 @@ void vLogMessage(DebugLevel usiDebugLevel,
         strcat(szLogLevel, kszLogLevel[TRACE]);
         strcat(szLogLevel, kszLogLevelColorEnd[TRACE]);
 
-        sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d [%s] ", stTime->tm_year + 1900, 
-                                                                    stTime->tm_mon + 1, 
-                                                                    stTime->tm_mday,
-                                                                    stTime->tm_hour,
-                                                                    stTime->tm_min,
-                                                                    stTime->tm_sec,
-                                                                    kszModuleName,
-                                                                    kiLine,
-                                                                    szLogLevel);
+        strcat(szDbg, " [");
+        strcat(szDbg, szLogLevel);
+        strcat(szDbg, "] ");
+
         strcat(szDbg, kszFmt);
         strcat(szDbg, "\n");
 
@@ -300,15 +256,10 @@ void vLogMessage(DebugLevel usiDebugLevel,
         break;
       }
 
-      sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d [%s] ", stTime->tm_year + 1900, 
-                                                                  stTime->tm_mon + 1, 
-                                                                  stTime->tm_mday,
-                                                                  stTime->tm_hour,
-                                                                  stTime->tm_min,
-                                                                  stTime->tm_sec,
-                                                                  kszModuleName,
-                                                                  kiLine,
-                                                                  kszLogLevel[TRACE]);
+      strcat(szDbg, " [");
+      strcat(szDbg, kszLogLevel[TRACE]);
+      strcat(szDbg, "] ");
+      
       strcat(szDbg, kszFmt);
       strcat(szDbg, "\n");
 
