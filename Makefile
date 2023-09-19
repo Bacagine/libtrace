@@ -22,13 +22,15 @@ OBJS       = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRC))
 LIB        = $(LIBDIR)/$(TARGET)
 LDFLAGS    = -L $(LIBDIR)
 LDLIBS     = -lm -pthread
-CFLAGS     = -I $(INCDIR) -Wall -Wextra -O3
+CFLAGS     = -I $(INCDIR) -Wall -Wextra
 DEBUGFLAGS = -g -O0 -DDEBUG_COMPILATION
 CC         = gcc
 
 ifdef DEBUG_COMPILATION
 	CFLAGS += $(DEBUGFLAGS) 
 	LDFLAGS += $(DEBUGFLAGS)
+else
+	CFLAGS += -O3
 endif
 
 all: $(OBJDIR) $(LIBDIR) $(BINDIR) $(LIB)
