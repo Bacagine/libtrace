@@ -1,6 +1,6 @@
 #!/bin/bash
 # 
-# install.sh
+# remove_logs.sh
 # 
 # Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
 #
