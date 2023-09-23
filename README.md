@@ -32,7 +32,6 @@ COLORED_LOG_LEVEL = false
 
 ## Build and Install
 ```
-$ ./mk
 # ./mkinstall
 ```
 
