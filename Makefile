@@ -1,14 +1,14 @@
-## 
-## \file Makefile
-## 
-## \brief Makefile for the project logger
-## 
-## This is the a Makefile to my personal logger C library
-##
-## \author Gustavo Bacagine <gustavo.bacagine@protonmail.com>
-##
-## \date: 2023-06-16
-##
+# 
+# Makefile
+# 
+# Makefile for the project logger
+# 
+# This is the a Makefile to my personal logger C library
+#
+# Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
+#
+# Date: 2023-06-16
+#
 
 TARGET     = liblog.so
 SRCDIR     = src
@@ -33,7 +33,7 @@ else
 	CFLAGS += -O3
 endif
 
-all: $(OBJDIR) $(LIBDIR) $(BINDIR) $(LIB)
+all: distclean $(OBJDIR) $(LIBDIR) $(LIB)
 	
 $(LIB): $(OBJS)
 	$(CC) -shared -o $@ $(OBJS) $(CFLAGS) $(LDLIBS)
@@ -48,20 +48,16 @@ $(OBJDIR):
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) -fPIC -c $< -o $@ $(CFLAGS) $(LDLIBS)
 
-debug: clean all
-
 clean:
 	rm -rvf $(OBJDIR)
 
 install: all
-	cp -r include/log/ /usr/include/
-	cp -r $(LIB) /usr/lib/$(TARGET)
+	./install.sh
 
 uninstall:
-	rm -r /usr/include/log
-	rm -r $(LIB) /usr/lib/$(TARGET)
+	./uninstall.sh
 
-test: all
+test: all $(BINDIR)
 	$(CC) -o $(BINDIR)/trace $(TESTDIR)/trace.c  $(CFLAGS) $(LDFLAGS) -llog
 	$(CC) -o $(BINDIR)/debug $(TESTDIR)/debug.c  $(CFLAGS) $(LDFLAGS) -llog
 	$(CC) -o $(BINDIR)/colored $(TESTDIR)/colored.c  $(CFLAGS) $(LDFLAGS) -llog
@@ -70,7 +66,7 @@ test: all
 	$(CC) -o $(BINDIR)/module $(OBJDIR)/module1.o $(OBJDIR)/module2.o $(CFLAGS) $(LDFLAGS) -llog
 	
 distclean: clean
-	rm -rvf *.log
+	./remove_logs.sh
 	rm -rvf $(LIBDIR)
 	rm -rvf $(BINDIR)
 	

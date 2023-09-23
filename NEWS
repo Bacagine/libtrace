@@ -1,0 +1,11 @@
+# -*- org *-*
+
+Copyright (C) 2023 Gustavo Bacagine <gustavo.bacagine@protonmail.com>
+
+log 2023-09-22
+
+Add the make scripts and the following scripts: 
+ install.sh,
+ uninstall.sh
+ remove_logs.sh
+

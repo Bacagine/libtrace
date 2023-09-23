@@ -1,0 +1,62 @@
+.TH log 1
+.SH NAME
+log \- a Debugging C Library
+
+.SH LIBRARY
+Debugging C library
+.RI (liblog,\ \-llog)
+
+.SH SYNOPSIS
+.nf
+.B #include <log/log.h>
+.PP
+.B #define\ CONF_FILE_NAME_LENGTH\ 256
+.B #define\ LOG_FILE_NAME_LENGTH\  256
+
+.B #define\ INFO\t\t    0\ /*\ Normal\ messages\t\t\t\t\t\t\t\ \ \                          */
+.B #define\ WARNING\t 1\ /*\ Warning\ alert\ messages\t\t\t\t\t\t\ \ \                      */
+.B #define\ ERROR\t\t   2\ /*\ Error\ messages\t\t\t\t\t\t\t\ \ \                           */
+.B #define\ FATAL\t\t   3\ /*\ Fatal\ error\ messages\t\t\t\t\t\t\ \ \                      */
+.B #define\ DEBUG\t\t   4\ /*\ Messages\ with\ more\ information\ about\ the\ source\ code\ */
+.B #define\ TRACE\t\t   5\ /*\ Show\ all\ messages\ in\ log\t\t\t\t\t\ \ \                  */
+.B 
+
+.B #define\ INFO_LEVEL\t\    giDebugLevel\ >=\ INFO
+.B #define\ WARNING_LEVEL\ giDebugLevel\ >=\ WARNING
+.B #define\ ERROR_LEVEL\t\   giDebugLevel\ >=\ ERROR
+.B #define\ FATAL_LEVEL\t\   giDebugLevel\ >=\ FATAL
+.B #define\ DEBUG_LEVEL\t\   giDebugLevel\ >=\ DEBUG
+.B #define\ TRACE_LEVEL\t\   giDebugLevel\ >=\ TRACE
+.B
+
+.B extern\ char\ gszConfFileName[LOG_FILE_NAME_LENGTH]
+.B extern\ char\ gszLogFileName[LOG_FILE_NAME_LENGTH]
+.B extern\ DebugLevel\ giDebugLevel
+.B extern\ bool\ gbColoredLogLevel
+ 
+.B void\ vSetConfFileName(const\ char\ *kszConfFile)
+.B void\ vSetLogFileName(const\ char\ *kszLogFileName)
+.B void\ vSetColoredLogLevel(bool\ bColored)
+.B void\ vSetLogLevel(DebugLevel\ usiDebugLevel)
+.B int\ iGetLogLevel(void)
+.B int\ iGetColoredLogLevel(void)
+.B void\ vLogMessage(const\ DebugLevel\ usiDebugLevel,
+.B\t\t\t\t\          const\ char\ *kszModuleName,
+.B\t\t\t\t\          const\ int\ kiLine,
+.B\t\t\t\t\          const\ char\ *kszFmt,\ ...)
+
+.SH DESCRIPTION
+This is a Debug C Library developed by Gustavo Bacagine. It is used in personal Bacagine C programs, but you can use this library in your programs too.
+
+This is a free software licensed under the terms of the GPL3. You can should have received the copy of GLP3 license, if you don't have a copy, get the license at this link: <https://www.gnu.org/licenses/gpl-3.0.html>
+
+.SH USAGE\ EXAMPLES
+You can see a usage examples of how to use this library at the github of the project at this link: <https://github.com/Bacagine/log>
+
+.SH BUGS
+.PP
+For reporting bugs, send a email to <gustavo.bacagine@protonmail.com>
+
+.SH AUTHOR
+.PP
+Gustavo Bacagine <gustavo.bacagine@protonmail.com>

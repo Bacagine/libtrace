@@ -1,0 +1,5 @@
+Installation proccess of liblog
+
+$ chmod +x mk* *.sh # grants execution permission to build and install scripts.
+$ sudo ./mkinstall  # Compile and install the software
+

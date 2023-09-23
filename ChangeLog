@@ -1,0 +1,17 @@
+22/09/2023 - Created the man page of the log C library
+22/09/2023 - Add the fowllowing scripts: install.sh, uninstall.sh and
+remove_logs.sh
+22/09/2023 - Add the following make scripts: mk, mkall, mkd, mkdall, mkclean,
+mkdistclea, mktest, mkinstall, mkuninstall.
+22/09/2023 - Add the files AUTHOR, ChangeLog, INSTALL, NEWS README
+
+14/09/2023 - Fix the error in global variables
+14/09/2023 - Fix README.md syntax highlighting
+
+20/06/2023 - Add GNU GPL3 License
+20/06/2023 - Create the colored.c debug.c and trace.c files
+20/06/2023 - Create the README.md file
+20/06/2023 - Add the log.conf file
+20/06/2023 - Created the log.c file
+20/06/2023 - Create the log.h header file
+

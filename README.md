@@ -4,6 +4,9 @@
 
 My personal debug library for my C/C++ programs
 
+To better understand my codes, read the README.md at [this link](https://github.com/Bacagine/Bacagine)
+
+
 # How to use?
 
 ## Log Levels
@@ -29,8 +32,8 @@ COLORED_LOG_LEVEL = false
 
 ## Build and Install
 ```
-$ make
-# make install
+$ ./mk
+# ./mkinstall
 ```
 
 ## Examples of usage
@@ -567,6 +570,6 @@ $ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib
 ### Uninstall
 
 ```
-# make uninstall
+# ./mkuninstall
 ```
 
