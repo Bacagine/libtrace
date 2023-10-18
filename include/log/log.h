@@ -30,22 +30,22 @@
 /**
  * Example of use:
  *
- * if(INFO_LOG_LEVEL)
+ * if(INFO_LOG_DETAILS)
  * {
  *   vTraceInfo("INFO Message");
  * }
  *
- * if(DEBUG_LOG_LEVEL)
+ * if(DEBUG_LOG_DETAILS)
  * {
  *   vTraceDebug("DEBUG Message");
  * }
  */
-#define INFO_LOG_LEVEL    giDebugLevel >= INFO_LEVEL   
-#define WARNING_LOG_LEVEL giDebugLevel >= WARNING_LEVEL
-#define ERROR_LOG_LEVEL   giDebugLevel >= ERROR_LEVEL
-#define FATAL_LOG_LEVEL   giDebugLevel >= FATAL_LEVEL
-#define DEBUG_LOG_LEVEL   giDebugLevel >= DEBUG_LEVEL
-#define TRACE_LOG_LEVEL   giDebugLevel >= TRACE_LEVEL
+#define INFO_LOG_DETAILS    giDebugLevel >= INFO_LEVEL   
+#define WARNING_LOG_DETAILS giDebugLevel >= WARNING_LEVEL
+#define ERROR_LOG_DETAILS   giDebugLevel >= ERROR_LEVEL
+#define FATAL_LOG_DETAILS   giDebugLevel >= FATAL_LEVEL
+#define DEBUG_LOG_DETAILS   giDebugLevel >= DEBUG_LEVEL
+#define TRACE_LOG_DETAILS   giDebugLevel >= TRACE_LEVEL
 
 /* White color */
 #define INFO_INIT_COLOR "\033[1;37m"
@@ -75,12 +75,12 @@
 #define vTraceError(FORMAT, ...)   _vTrace(ERROR_LEVEL,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
 #define vTraceFatal(FORMAT, ...)   _vTrace(FATAL_LEVEL,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
 #define vTraceDebug(FORMAT, ...)   _vTrace(DEBUG_LEVEL,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
-#define vTraceAll(FORMAT, ...)   _vTrace(TRACE_LEVEL,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
+#define vTraceAll(FORMAT, ...)     _vTrace(TRACE_LEVEL,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
 
 #define vTrace(LOG_LEVEL, FORMAT, ...) if(giDebugLevel >= LOG_LEVEL) _vTrace(LOG_LEVEL, __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
 
-#define vTraceBegin() if(INFO_LOG_LEVEL) _vTrace(INFO_LEVEL, __FILE__, __LINE__, "%s - begin", __func__)
-#define vTraceEnd() if(INFO_LOG_LEVEL) _vTrace(INFO_LEVEL, __FILE__, __LINE__, "%s - end", __func__)
+#define vTraceBegin() if(INFO_LOG_DETAILS) _vTrace(INFO_LEVEL, __FILE__, __LINE__, "%s - begin", __func__)
+#define vTraceEnd()   if(INFO_LOG_DETAILS) _vTrace(INFO_LEVEL, __FILE__, __LINE__, "%s - end", __func__)
 
 typedef int DebugLevel;
 

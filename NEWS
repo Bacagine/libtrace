@@ -2,6 +2,9 @@
 
 Copyright (C) 2023 Gustavo Bacagine <gustavo.bacagine@protonmail.com>
 
+log 2023-10-18
+Changed the name of macros used in comparison of debug level
+
 log 2023-10-17
 
 Changed the name of macros, functions and variables

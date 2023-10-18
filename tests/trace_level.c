@@ -1,5 +1,5 @@
 /**
- * trace_level.c: Test to log library with TRACE_LOG_LEVEL
+ * trace_level.c: Test to log library with TRACE_LOG_DETAILS
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -35,17 +35,17 @@ int main(int argc, char **argv, char **envp)
   
   vSetLogFileName("trace_level.log");
 
-  if(INFO_LOG_LEVEL)
+  if(INFO_LOG_DETAILS)
   {
     vTraceInfo("start %s function", __func__);
     vTraceInfo("INFO Message"      );
   }
 
-  if(WARNING_LOG_LEVEL) vTraceWarning("WARNING Message");
-  if(ERROR_LOG_LEVEL  ) vTraceError("ERROR Message"    );
-  if(FATAL_LOG_LEVEL  ) vTraceFatal("FATAL Message"    );
+  if(WARNING_LOG_DETAILS) vTraceWarning("WARNING Message");
+  if(ERROR_LOG_DETAILS  ) vTraceError("ERROR Message"    );
+  if(FATAL_LOG_DETAILS  ) vTraceFatal("FATAL Message"    );
   
-  if(DEBUG_LOG_LEVEL  )
+  if(DEBUG_LOG_DETAILS  )
   {
     vTraceDebug("argc = %d", argc);
     for(ii = 0; ii < argc; ii++)
@@ -59,13 +59,13 @@ int main(int argc, char **argv, char **envp)
     }
   }
   
-  if(TRACE_LOG_LEVEL  )
+  if(TRACE_LOG_DETAILS  )
   {
     vTraceAll("TRACE Message");
     vTraceAll("%s(argc=%p, argv=%p, envp=%p)", __func__, &argc, &argv, &envp);
   }
 
-  if(INFO_LOG_LEVEL)
+  if(INFO_LOG_DETAILS)
   {
     vTraceInfo("End %s function", __func__);
   }
