@@ -20,32 +20,32 @@
 #define CONF_FILE_NAME_LENGTH 256
 #define LOG_FILE_NAME_LENGTH  256
 
-#define INFO    0 /* Normal messages                                      */
-#define WARNING 1 /* Warning alert messages                               */
-#define ERROR   2 /* Error messages                                       */
-#define FATAL   3 /* Fatal error messages                                 */
-#define DEBUG   4 /* Messages with more information about the source code */
-#define TRACE   5 /* Show all messages in log                             */
+#define INFO_LEVEL    0 /* Normal messages                                      */
+#define WARNING_LEVEL 1 /* Warning alert messages                               */
+#define ERROR_LEVEL   2 /* Error messages                                       */
+#define FATAL_LEVEL   3 /* Fatal error messages                                 */
+#define DEBUG_LEVEL   4 /* Messages with more information about the source code */
+#define TRACE_LEVEL   5 /* Show all messages in log                             */
 
 /**
  * Example of use:
  *
- * if(INFO_LEVEL)
+ * if(INFO_LOG_LEVEL)
  * {
- *   vLogInfo("INFO Message");
+ *   vTraceInfo("INFO Message");
  * }
  *
- * if(DEBUG_LEVEL)
+ * if(DEBUG_LOG_LEVEL)
  * {
- *   vLogDebug("DEBUG Message");
+ *   vTraceDebug("DEBUG Message");
  * }
  */
-#define INFO_LEVEL    giDebugLevel >= INFO   
-#define WARNING_LEVEL giDebugLevel >= WARNING
-#define ERROR_LEVEL   giDebugLevel >= ERROR
-#define FATAL_LEVEL   giDebugLevel >= FATAL
-#define DEBUG_LEVEL   giDebugLevel >= DEBUG
-#define TRACE_LEVEL   giDebugLevel >= TRACE
+#define INFO_LOG_LEVEL    giDebugLevel >= INFO_LEVEL   
+#define WARNING_LOG_LEVEL giDebugLevel >= WARNING_LEVEL
+#define ERROR_LOG_LEVEL   giDebugLevel >= ERROR_LEVEL
+#define FATAL_LOG_LEVEL   giDebugLevel >= FATAL_LEVEL
+#define DEBUG_LOG_LEVEL   giDebugLevel >= DEBUG_LEVEL
+#define TRACE_LOG_LEVEL   giDebugLevel >= TRACE_LEVEL
 
 /* White color */
 #define INFO_INIT_COLOR "\033[1;37m"
@@ -70,12 +70,17 @@
 #define TRACE_INIT_COLOR "\033[1;33m"
 #define TRACE_END_COLOR  "\033[0m"
 
-#define vLogInfo(FORMAT, ...)    vLogMessage(INFO,    __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
-#define vLogWarning(FORMAT, ...) vLogMessage(WARNING, __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
-#define vLogError(FORMAT, ...)   vLogMessage(ERROR,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
-#define vLogFatal(FORMAT, ...)   vLogMessage(FATAL,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
-#define vLogDebug(FORMAT, ...)   vLogMessage(DEBUG,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
-#define vLogTrace(FORMAT, ...)   vLogMessage(TRACE,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
+#define vTraceInfo(FORMAT, ...)    _vTrace(INFO_LEVEL,    __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
+#define vTraceWarning(FORMAT, ...) _vTrace(WARNING_LEVEL, __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
+#define vTraceError(FORMAT, ...)   _vTrace(ERROR_LEVEL,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
+#define vTraceFatal(FORMAT, ...)   _vTrace(FATAL_LEVEL,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
+#define vTraceDebug(FORMAT, ...)   _vTrace(DEBUG_LEVEL,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
+#define vTraceAll(FORMAT, ...)   _vTrace(TRACE_LEVEL,   __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
+
+#define vTrace(LOG_LEVEL, FORMAT, ...) if(giDebugLevel >= LOG_LEVEL) _vTrace(LOG_LEVEL, __FILE__, __LINE__, FORMAT, ##__VA_ARGS__)
+
+#define vTraceBegin() if(INFO_LOG_LEVEL) _vTrace(INFO_LEVEL, __FILE__, __LINE__, "%s - begin", __func__)
+#define vTraceEnd() if(INFO_LOG_LEVEL) _vTrace(INFO_LEVEL, __FILE__, __LINE__, "%s - end", __func__)
 
 typedef int DebugLevel;
 
@@ -107,7 +112,7 @@ extern char gszLogFileName[LOG_FILE_NAME_LENGTH];
 
 /**
  * Receive the level of debug from .conf 
- * file, the default is 0 (INFO)
+ * file, the default is 0 (INFO_LEVEL)
  */
 extern DebugLevel giDebugLevel;
 
@@ -165,12 +170,12 @@ int iGetLogLevel(void);
 int iGetColoredLogLevel(void);
 
 /**
- * Print a log message
+ * Print a log message with the log level between [].
  */
-void vLogMessage(const DebugLevel usiDebugLevel,
-                 const char *kszModuleName,
-                 const int kiLine,
-                 const char *kszFmt, ...);
+void _vTrace(const DebugLevel usiDebugLevel,
+             const char *kpszModuleName,
+             const int kiLine,
+             const char *kpszFmt, ...);
 
 #endif /* _LOG_H_ */
 

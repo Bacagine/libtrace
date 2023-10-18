@@ -1,5 +1,5 @@
 /**
- * colored.c: Test to log library, using colored log level
+ * trace_level.c: Test to log library with TRACE_LOG_LEVEL
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -11,12 +11,10 @@
 
 #define UNUSED(X) (void) X
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
-  int iColoredLogLevel;
+  int ii;
   
-  UNUSED(argc);
-  UNUSED(argv);
   UNUSED(gbColoredLogLevel);
   UNUSED(gszLogFileName);
   UNUSED(gszConfFileName);
@@ -35,15 +33,8 @@ int main(int argc, char **argv)
     exit(EXIT_FAILURE);
   }
   
-  iColoredLogLevel = iGetColoredLogLevel();
-  
-  if(iColoredLogLevel == 0 || iColoredLogLevel == 1)
-  {
-    vSetColoredLogLevel(iColoredLogLevel);
-  }
-  
-  vSetLogFileName("colored.log");
-  
+  vSetLogFileName("trace_level.log");
+
   if(INFO_LOG_LEVEL)
   {
     vTraceInfo("start %s function", __func__);
@@ -54,10 +45,26 @@ int main(int argc, char **argv)
   if(ERROR_LOG_LEVEL  ) vTraceError("ERROR Message"    );
   if(FATAL_LOG_LEVEL  ) vTraceFatal("FATAL Message"    );
   
-  if(DEBUG_LOG_LEVEL  ) vTraceDebug("argc = %d", argc);
+  if(DEBUG_LOG_LEVEL  )
+  {
+    vTraceDebug("argc = %d", argc);
+    for(ii = 0; ii < argc; ii++)
+    {
+      vTraceDebug("argv[%d] = %s", ii, argv[ii]);
+    }
 
-  if(TRACE_LOG_LEVEL  ) vTraceAll("%s(argc = %p, argv = %p)", __func__, &argc, &argv);
+    for(ii = 0; envp[ii] != NULL; ii++)
+    {
+      vTraceDebug("envp[%d] = %s", ii, envp[ii]);
+    }
+  }
   
+  if(TRACE_LOG_LEVEL  )
+  {
+    vTraceAll("TRACE Message");
+    vTraceAll("%s(argc=%p, argv=%p, envp=%p)", __func__, &argc, &argv, &envp);
+  }
+
   if(INFO_LOG_LEVEL)
   {
     vTraceInfo("End %s function", __func__);

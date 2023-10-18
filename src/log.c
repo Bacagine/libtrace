@@ -44,10 +44,10 @@ void vSetLogLevel(DebugLevel usiDebugLevel)
   giDebugLevel = usiDebugLevel;
 }
 
-void vLogMessage(DebugLevel usiDebugLevel,
-                 const char *kszModuleName,
-                 const int kiLine, 
-                 const char *kszFmt, ...)
+void _vTrace(DebugLevel usiDebugLevel,
+             const char *kpszModuleName,
+             const int kiLine, 
+             const char *kpszFmt, ...)
 {
   va_list args;
   FILE *fpLogFile = NULL;
@@ -65,7 +65,7 @@ void vLogMessage(DebugLevel usiDebugLevel,
     exit(EXIT_FAILURE);
   }
   
-  va_start(args, kszFmt);
+  va_start(args, kpszFmt);
   
   sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d", stTime->tm_year + 1900, 
                                                         stTime->tm_mon + 1, 
@@ -73,28 +73,28 @@ void vLogMessage(DebugLevel usiDebugLevel,
                                                         stTime->tm_hour,
                                                         stTime->tm_min,
                                                         stTime->tm_sec,
-                                                        kszModuleName,
+                                                        kpszModuleName,
                                                         kiLine
   );
 
   switch(usiDebugLevel)
   {
-    case INFO:
+    case INFO_LEVEL:
       if(gbColoredLogLevel)
       {
         char szLogLevel[22];
         
         memset(szLogLevel, 0, sizeof(szLogLevel));
         
-        strcat(szLogLevel, kszLogLevelColorInit[INFO]);
-        strcat(szLogLevel, kszLogLevel[INFO]);
-        strcat(szLogLevel, kszLogLevelColorEnd[INFO]);
+        strcat(szLogLevel, kszLogLevelColorInit[INFO_LEVEL]);
+        strcat(szLogLevel, kszLogLevel[INFO_LEVEL]);
+        strcat(szLogLevel, kszLogLevelColorEnd[INFO_LEVEL]);
       
         strcat(szDbg, " [");
         strcat(szDbg, szLogLevel);
         strcat(szDbg, "] ");
 
-        strcat(szDbg, kszFmt);
+        strcat(szDbg, kpszFmt);
         strcat(szDbg, "\n");
 
         vfprintf(fpLogFile, szDbg, args);
@@ -102,30 +102,30 @@ void vLogMessage(DebugLevel usiDebugLevel,
       }
       
       strcat(szDbg, " [");
-      strcat(szDbg, kszLogLevel[INFO]);
+      strcat(szDbg, kszLogLevel[INFO_LEVEL]);
       strcat(szDbg, "] ");
 
-      strcat(szDbg, kszFmt);
+      strcat(szDbg, kpszFmt);
       strcat(szDbg, "\n");
 
       vfprintf(fpLogFile, szDbg, args);
       break;
-    case WARNING:
+    case WARNING_LEVEL:
       if(gbColoredLogLevel)
       {
         char szLogLevel[25];
         
         memset(szLogLevel, 0, sizeof(szLogLevel));
         
-        strcat(szLogLevel, kszLogLevelColorInit[WARNING]);
-        strcat(szLogLevel, kszLogLevel[WARNING]);
-        strcat(szLogLevel, kszLogLevelColorEnd[WARNING]);
+        strcat(szLogLevel, kszLogLevelColorInit[WARNING_LEVEL]);
+        strcat(szLogLevel, kszLogLevel[WARNING_LEVEL]);
+        strcat(szLogLevel, kszLogLevelColorEnd[WARNING_LEVEL]);
    
         strcat(szDbg, " [");     
         strcat(szDbg, szLogLevel);
         strcat(szDbg, "] ");
 
-        strcat(szDbg, kszFmt);
+        strcat(szDbg, kpszFmt);
         strcat(szDbg, "\n");
 
         vfprintf(fpLogFile, szDbg, args);
@@ -133,30 +133,30 @@ void vLogMessage(DebugLevel usiDebugLevel,
       }
 
       strcat(szDbg, " [");
-      strcat(szDbg, kszLogLevel[WARNING]);
+      strcat(szDbg, kszLogLevel[WARNING_LEVEL]);
       strcat(szDbg, "] ");
 
-      strcat(szDbg, kszFmt);
+      strcat(szDbg, kpszFmt);
       strcat(szDbg, "\n");
 
       vfprintf(fpLogFile, szDbg, args);
       break;
-    case ERROR:
+    case ERROR_LEVEL:
       if(gbColoredLogLevel)
       {
         char szLogLevel[23];
         
         memset(szLogLevel, 0, sizeof(szLogLevel));
         
-        strcat(szLogLevel, kszLogLevelColorInit[ERROR]);
-        strcat(szLogLevel, kszLogLevel[ERROR]);
-        strcat(szLogLevel, kszLogLevelColorEnd[ERROR]);
+        strcat(szLogLevel, kszLogLevelColorInit[ERROR_LEVEL]);
+        strcat(szLogLevel, kszLogLevel[ERROR_LEVEL]);
+        strcat(szLogLevel, kszLogLevelColorEnd[ERROR_LEVEL]);
 
         strcat(szDbg, " [");
         strcat(szDbg, szLogLevel);
         strcat(szDbg, "] ");
 
-        strcat(szDbg, kszFmt);
+        strcat(szDbg, kpszFmt);
         strcat(szDbg, "\n");
 
         vfprintf(fpLogFile, szDbg, args);
@@ -164,30 +164,30 @@ void vLogMessage(DebugLevel usiDebugLevel,
       }
 
       strcat(szDbg, " [");
-      strcat(szDbg, kszLogLevel[ERROR]);
+      strcat(szDbg, kszLogLevel[ERROR_LEVEL]);
       strcat(szDbg, "] ");
 
-      strcat(szDbg, kszFmt);
+      strcat(szDbg, kpszFmt);
       strcat(szDbg, "\n");
 
       vfprintf(fpLogFile, szDbg, args);
       break;
-    case FATAL:
+    case FATAL_LEVEL:
       if(gbColoredLogLevel)
       {
         char szLogLevel[23];
         
         memset(szLogLevel, 0, sizeof(szLogLevel));
         
-        strcat(szLogLevel, kszLogLevelColorInit[FATAL]);
-        strcat(szLogLevel, kszLogLevel[FATAL]);
-        strcat(szLogLevel, kszLogLevelColorEnd[FATAL]);
+        strcat(szLogLevel, kszLogLevelColorInit[FATAL_LEVEL]);
+        strcat(szLogLevel, kszLogLevel[FATAL_LEVEL]);
+        strcat(szLogLevel, kszLogLevelColorEnd[FATAL_LEVEL]);
 
         strcat(szDbg, " [");
         strcat(szDbg, szLogLevel);
         strcat(szDbg, "] ");
 
-        strcat(szDbg, kszFmt);
+        strcat(szDbg, kpszFmt);
         strcat(szDbg, "\n");
 
         vfprintf(fpLogFile, szDbg, args);
@@ -195,30 +195,30 @@ void vLogMessage(DebugLevel usiDebugLevel,
       }
 
       strcat(szDbg, " [");
-      strcat(szDbg, kszLogLevel[FATAL]);
+      strcat(szDbg, kszLogLevel[FATAL_LEVEL]);
       strcat(szDbg, "] ");
 
-      strcat(szDbg, kszFmt);
+      strcat(szDbg, kpszFmt);
       strcat(szDbg, "\n");
 
       vfprintf(fpLogFile, szDbg, args);
       break;
-    case DEBUG:
+    case DEBUG_LEVEL:
       if(gbColoredLogLevel)
       {
         char szLogLevel[23];
         
         memset(szLogLevel, 0, sizeof(szLogLevel));
         
-        strcat(szLogLevel, kszLogLevelColorInit[DEBUG]);
-        strcat(szLogLevel, kszLogLevel[DEBUG]);
-        strcat(szLogLevel, kszLogLevelColorEnd[DEBUG]);
+        strcat(szLogLevel, kszLogLevelColorInit[DEBUG_LEVEL]);
+        strcat(szLogLevel, kszLogLevel[DEBUG_LEVEL]);
+        strcat(szLogLevel, kszLogLevelColorEnd[DEBUG_LEVEL]);
 
         strcat(szDbg, " [");
         strcat(szDbg, szLogLevel);
         strcat(szDbg, "] ");
 
-        strcat(szDbg, kszFmt);
+        strcat(szDbg, kpszFmt);
         strcat(szDbg, "\n");
 
         vfprintf(fpLogFile, szDbg, args);
@@ -226,30 +226,30 @@ void vLogMessage(DebugLevel usiDebugLevel,
       }
 
       strcat(szDbg, " [");
-      strcat(szDbg, kszLogLevel[DEBUG]);
+      strcat(szDbg, kszLogLevel[DEBUG_LEVEL]);
       strcat(szDbg, "] ");
 
-      strcat(szDbg, kszFmt);
+      strcat(szDbg, kpszFmt);
       strcat(szDbg, "\n");
 
       vfprintf(fpLogFile, szDbg, args);
       break;
-    case TRACE:
+    case TRACE_LEVEL:
       if(gbColoredLogLevel)
       {
         char szLogLevel[23];
         
         memset(szLogLevel, 0, sizeof(szLogLevel));
         
-        strcat(szLogLevel, kszLogLevelColorInit[TRACE]);
-        strcat(szLogLevel, kszLogLevel[TRACE]);
-        strcat(szLogLevel, kszLogLevelColorEnd[TRACE]);
+        strcat(szLogLevel, kszLogLevelColorInit[TRACE_LEVEL]);
+        strcat(szLogLevel, kszLogLevel[TRACE_LEVEL]);
+        strcat(szLogLevel, kszLogLevelColorEnd[TRACE_LEVEL]);
 
         strcat(szDbg, " [");
         strcat(szDbg, szLogLevel);
         strcat(szDbg, "] ");
 
-        strcat(szDbg, kszFmt);
+        strcat(szDbg, kpszFmt);
         strcat(szDbg, "\n");
 
         vfprintf(fpLogFile, szDbg, args);
@@ -257,10 +257,10 @@ void vLogMessage(DebugLevel usiDebugLevel,
       }
 
       strcat(szDbg, " [");
-      strcat(szDbg, kszLogLevel[TRACE]);
+      strcat(szDbg, kszLogLevel[TRACE_LEVEL]);
       strcat(szDbg, "] ");
       
-      strcat(szDbg, kszFmt);
+      strcat(szDbg, kpszFmt);
       strcat(szDbg, "\n");
 
       vfprintf(fpLogFile, szDbg, args);

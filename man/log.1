@@ -13,20 +13,20 @@ Debugging C library
 .B #define\ CONF_FILE_NAME_LENGTH\ 256
 .B #define\ LOG_FILE_NAME_LENGTH\  256
 
-.B #define\ INFO\t\t    0\ /*\ Normal\ messages\t\t\t\t\t\t\t\ \ \                          */
-.B #define\ WARNING\t 1\ /*\ Warning\ alert\ messages\t\t\t\t\t\t\ \ \                      */
-.B #define\ ERROR\t\t   2\ /*\ Error\ messages\t\t\t\t\t\t\t\ \ \                           */
-.B #define\ FATAL\t\t   3\ /*\ Fatal\ error\ messages\t\t\t\t\t\t\ \ \                      */
-.B #define\ DEBUG\t\t   4\ /*\ Messages\ with\ more\ information\ about\ the\ source\ code\ */
-.B #define\ TRACE\t\t   5\ /*\ Show\ all\ messages\ in\ log\t\t\t\t\t\ \ \                  */
+.B #define\ INFO_LEVEL\t\t    0\ /*\ Normal\ messages\t\t\t\t\t\t\t\ \ \                          */
+.B #define\ WARNING_LEVEL\t 1\ /*\ Warning\ alert\ messages\t\t\t\t\t\t\ \ \                      */
+.B #define\ ERROR_LEVEL\t\t   2\ /*\ Error\ messages\t\t\t\t\t\t\t\ \ \                           */
+.B #define\ FATAL_LEVEL\t\t   3\ /*\ Fatal\ error\ messages\t\t\t\t\t\t\ \ \                      */
+.B #define\ DEBUG_LEVEL\t\t   4\ /*\ Messages\ with\ more\ information\ about\ the\ source\ code\ */
+.B #define\ TRACE_LEVEL\t\t   5\ /*\ Show\ all\ messages\ in\ log\t\t\t\t\t\ \ \                  */
 .B 
 
-.B #define\ INFO_LEVEL\t\    giDebugLevel\ >=\ INFO
-.B #define\ WARNING_LEVEL\ giDebugLevel\ >=\ WARNING
-.B #define\ ERROR_LEVEL\t\   giDebugLevel\ >=\ ERROR
-.B #define\ FATAL_LEVEL\t\   giDebugLevel\ >=\ FATAL
-.B #define\ DEBUG_LEVEL\t\   giDebugLevel\ >=\ DEBUG
-.B #define\ TRACE_LEVEL\t\   giDebugLevel\ >=\ TRACE
+.B #define\ INFO_LEVEL_LOG_LEVEL\t\    giDebugLevel\ >=\ INFO_LEVEL
+.B #define\ WARNING_LEVEL_LOG_LEVEL\ giDebugLevel\ >=\ WARNING_LEVEL
+.B #define\ ERROR_LEVEL_LOG_LEVEL\t\   giDebugLevel\ >=\ ERROR_LEVEL
+.B #define\ FATAL_LEVEL_LOG_LEVEL\t\   giDebugLevel\ >=\ FATAL_LEVEL
+.B #define\ DEBUG_LEVEL_LOG_LEVEL\t\   giDebugLevel\ >=\ DEBUG_LEVEL
+.B #define\ TRACE_LEVEL_LOG_LEVEL\t\   giDebugLevel\ >=\ TRACE_LEVEL
 .B
 
 .B extern\ char\ gszConfFileName[LOG_FILE_NAME_LENGTH]
@@ -40,10 +40,10 @@ Debugging C library
 .B void\ vSetLogLevel(DebugLevel\ usiDebugLevel)
 .B int\ iGetLogLevel(void)
 .B int\ iGetColoredLogLevel(void)
-.B void\ vLogMessage(const\ DebugLevel\ usiDebugLevel,
-.B\t\t\t\t\          const\ char\ *kszModuleName,
-.B\t\t\t\t\          const\ int\ kiLine,
-.B\t\t\t\t\          const\ char\ *kszFmt,\ ...)
+.B void\ _vTrace(const\ DebugLevel\ usiDebugLevel,
+.B\t\t\t\ \         const\ char\ *kpszModuleName,
+.B\t\t\t\ \         const\ int\ kiLine,
+.B\t\t\t\ \         const\ char\ *kpszFmt,\ ...)
 
 .SH DESCRIPTION
 This is a Debug C Library developed by Gustavo Bacagine. It is used in personal Bacagine C programs, but you can use this library in your programs too.

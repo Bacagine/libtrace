@@ -1,5 +1,5 @@
 /**
- * debug.c: Exemple of the DEBUG_LEVEL
+ * debug.c: Exemple of the DEBUG_LOG_LEVEL
  * 
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -26,59 +26,59 @@ typedef struct Person
 
 static void vInitPerson(PPerson *ppstPerson)
 {
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("start %s function", __func__);
-    vLogInfo("Setting the default values in members of struct Person");
+    vTraceInfo("start %s function", __func__);
+    vTraceInfo("Setting the default values in members of struct Person");
   }
   
   memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge));
   (*ppstPerson)->uAge = 0;
   
-  if(DEBUG_LEVEL)
+  if(DEBUG_LOG_LEVEL)
   {
-    vLogDebug("memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge))");
-    vLogDebug("(*ppstPerson)->uAge = 0");
+    vTraceDebug("memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge))");
+    vTraceDebug("(*ppstPerson)->uAge = 0");
   }
 
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("end %s function", __func__);
+    vTraceInfo("end %s function", __func__);
   }
 }
   
 static void vCreatePerson(PPerson *ppstPerson, const char *szName, const uint8_t uAge)
 {
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("start %s function", __func__);
-    vLogInfo("create a new person");
+    vTraceInfo("start %s function", __func__);
+    vTraceInfo("create a new person");
   }
 
   strcpy((*ppstPerson)->szName, szName);
   (*ppstPerson)->uAge = uAge;
 
-  if(DEBUG_LEVEL)
+  if(DEBUG_LOG_LEVEL)
   {
-    vLogDebug("Values of the member Person");
-    vLogDebug("(*ppstPerson)->szName = %s", (*ppstPerson)->szName);
-    vLogDebug("(*ppstPerson)->uAge = %d", (*ppstPerson)->uAge);
+    vTraceDebug("Values of the member Person");
+    vTraceDebug("(*ppstPerson)->szName = %s", (*ppstPerson)->szName);
+    vTraceDebug("(*ppstPerson)->uAge = %d", (*ppstPerson)->uAge);
   }
 
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Person created with succes");
-    vLogInfo("end %s function", __func__);
+    vTraceInfo("Person created with succes");
+    vTraceInfo("end %s function", __func__);
   }
 }
 
 static void vShowPerson(PPerson pstPerson)
 {
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("start %s function", __func__);
-    vLogInfo("Show Person");
-    vLogInfo("Name: %s\n"
+    vTraceInfo("start %s function", __func__);
+    vTraceInfo("Show Person");
+    vTraceInfo("Name: %s\n"
              "Age.: %d\n", pstPerson->szName,
                            pstPerson->uAge);
   }
@@ -87,42 +87,42 @@ static void vShowPerson(PPerson pstPerson)
          "Age.: %d\n", pstPerson->szName,
                        pstPerson->uAge);
 
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("end %s function", __func__);
+    vTraceInfo("end %s function", __func__);
   }
 }
 
 static void vDestroyPerson(PPerson *ppstPerson)
 {
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("start %s function", __func__);
+    vTraceInfo("start %s function", __func__);
   }
   
   memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge));
   (*ppstPerson)->uAge = 0;
   
-  if(DEBUG_LEVEL)
+  if(DEBUG_LOG_LEVEL)
   {
-    vLogDebug("memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge))");
-    vLogDebug("(*ppstPerson)->uAge = 0");
-    vLogDebug("Freeing Person structure pointer");
+    vTraceDebug("memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge))");
+    vTraceDebug("(*ppstPerson)->uAge = 0");
+    vTraceDebug("Freeing Person structure pointer");
   }
 
   free((*ppstPerson));
   (*ppstPerson) = NULL;
 
-  if(DEBUG_LEVEL)
+  if(DEBUG_LOG_LEVEL)
   {
-    vLogDebug("free((*ppstPerson))");
-    vLogDebug("(*ppstPerson) = NULL");
-    vLogDebug("Person structure pointer free");
+    vTraceDebug("free((*ppstPerson))");
+    vTraceDebug("(*ppstPerson) = NULL");
+    vTraceDebug("Person structure pointer free");
   }
 
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("end %s function", __func__);
+    vTraceInfo("end %s function", __func__);
   }
 }
 
@@ -153,16 +153,16 @@ int main(int argc, char **argv)
   vSetLogFileName("debug.log");
   
   /* Initial log messages */
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Start of function %s", __func__);
+    vTraceInfo("Start of function %s", __func__);
   }
   
   if(pstPerson == NULL)
   {
-    if(DEBUG_LEVEL)
+    if(DEBUG_LOG_LEVEL)
     {
-      vLogDebug("E: out memory in allocation of pstPerson!");
+      vTraceDebug("E: out memory in allocation of pstPerson!");
     }
   }
 
@@ -175,9 +175,9 @@ int main(int argc, char **argv)
   vDestroyPerson(&pstPerson);
   
   /* End log messages */
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("End of function %s", __func__);
+    vTraceInfo("End of function %s", __func__);
   }
 
   return 0;

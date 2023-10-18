@@ -48,14 +48,14 @@ int main(int argc, char **argv)
   
   vSetLogFileName("module.log"); 
   
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Start %s function", __func__);
-    vLogInfo("Debug Level = %d", giDebugLevel);
-    vLogInfo("Colored Log Level = %s", 
+    vTraceInfo("Start %s function", __func__);
+    vTraceInfo("Debug Level = %d", giDebugLevel);
+    vTraceInfo("Colored Log Level = %s", 
       gbColoredLogLevel == true ? "true" : "false");
-    vLogInfo("Configure file: %s", gszConfFileName);
-    vLogInfo("Log file: %s", gszLogFileName);
+    vTraceInfo("Configure file: %s", gszConfFileName);
+    vTraceInfo("Log file: %s", gszLogFileName);
   }
 
   vShowDebugLevel();
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
   vShowConfFileName();
   vShowLogFileName();
   
-  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+  if(INFO_LOG_LEVEL) vTraceInfo("End %s funciton", __func__);
 
   return 0;
 }

@@ -34,12 +34,14 @@ log
 ├── tests
 │   ├── colored.c
 │   ├── debug.c
+│   ├── hello_log.log
 │   ├── module1.c
 │   ├── module2.c
-│   └── trace.c
+│   ├── trace.c
+│   └── trace_level.c
 └── uninstall.sh
 
-8 directories, 30 files
+8 directories, 32 files
 
 AUTHORS.......: The name and email of project author
 ChangeLog.....: Changelog of project

@@ -1,9 +1,15 @@
 /**
- * trace.c: Test to log library with TRACE_LEVEL
+ * trace.c
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
- * Date: 2023-06-16
+ * Description: File created to test the new macros:
+ *  vTrace
+ *  vTraceBegin
+ *  vTraceEnd
+ *
+ * Date: 2023-10-17
+ *
  */
 
 #include <stdio.h>
@@ -11,10 +17,24 @@
 
 #define UNUSED(X) (void) X
 
-int main(int argc, char **argv, char **envp)
+void vMyFunc(void)
 {
-  int ii;
+  vTraceBegin();
   
+  vTrace(INFO_LEVEL, "INFO MESSAGE");
+  vTrace(WARNING_LEVEL, "WARNING MESSAGE");
+  vTrace(ERROR_LEVEL, "ERROR MESSAGE");
+  vTrace(FATAL_LEVEL, "FATAL MESSAGE");
+  vTrace(DEBUG_LEVEL, "DEBUG MESSAGE");
+  vTrace(TRACE_LEVEL, "TRACE MESSAGE");
+
+  vTraceEnd();
+}
+
+int main(int argc, char **argv)
+{
+  UNUSED(argc);
+  UNUSED(argv);
   UNUSED(gbColoredLogLevel);
   UNUSED(gszLogFileName);
   UNUSED(gszConfFileName);
@@ -35,40 +55,13 @@ int main(int argc, char **argv, char **envp)
   
   vSetLogFileName("trace.log");
 
-  if(INFO_LEVEL)
-  {
-    vLogInfo("start %s function", __func__);
-    vLogInfo("INFO Message"      );
-  }
-
-  if(WARNING_LEVEL) vLogWarning("WARNING Message");
-  if(ERROR_LEVEL  ) vLogError("ERROR Message"    );
-  if(FATAL_LEVEL  ) vLogFatal("FATAL Message"    );
+  vTraceBegin();
   
-  if(DEBUG_LEVEL  )
-  {
-    vLogDebug("argc = %d", argc);
-    for(ii = 0; ii < argc; ii++)
-    {
-      vLogDebug("argv[%d] = %s", ii, argv[ii]);
-    }
+  vTrace(INFO_LEVEL, "Main Info Message :)");
 
-    for(ii = 0; envp[ii] != NULL; ii++)
-    {
-      vLogDebug("envp[%d] = %s", ii, envp[ii]);
-    }
-  }
-  
-  if(TRACE_LEVEL  )
-  {
-    vLogTrace("TRACE Message");
-    vLogTrace("%s(argc=%p, argv=%p, envp=%p)", __func__, &argc, &argv, &envp);
-  }
+  vMyFunc();
 
-  if(INFO_LEVEL)
-  {
-    vLogInfo("End %s function", __func__);
-  }
+  vTraceEnd();
 
   return 0;
 }

@@ -21,15 +21,15 @@ void vShowDebugLevel(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Start %s function", __func__);
-    vLogInfo("Debug Level = %d", giDebugLevel);
+    vTraceInfo("Start %s function", __func__);
+    vTraceInfo("Debug Level = %d", giDebugLevel);
   }
 
   printf("Debug Level = %d\n", giDebugLevel);
 
-  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+  if(INFO_LOG_LEVEL) vTraceInfo("End %s funciton", __func__);
 }
 
 void vShowColoredLogLevel(void)
@@ -40,17 +40,17 @@ void vShowColoredLogLevel(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Start %s function", __func__);
-    vLogInfo("Colored Log Level = %s", 
+    vTraceInfo("Start %s function", __func__);
+    vTraceInfo("Colored Log Level = %s", 
       gbColoredLogLevel == true ? "true" : "false");
   } 
 
   printf("Colored Log Level = %s\n", 
       gbColoredLogLevel == true ? "true" : "false");
 
-  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+  if(INFO_LOG_LEVEL) vTraceInfo("End %s funciton", __func__);
 }
 
 void vShowConfFileName(void)
@@ -61,15 +61,15 @@ void vShowConfFileName(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Start %s function", __func__);
-    vLogInfo("Configure file: %s", gszConfFileName);
+    vTraceInfo("Start %s function", __func__);
+    vTraceInfo("Configure file: %s", gszConfFileName);
   }
 
   printf("Configure file: %s\n", gszConfFileName);
 
-  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+  if(INFO_LOG_LEVEL) vTraceInfo("End %s funciton", __func__);
 }
 
 void vShowLogFileName(void)
@@ -80,14 +80,14 @@ void vShowLogFileName(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
- if(INFO_LEVEL)
+ if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Start %s function", __func__);
-    vLogInfo("Log file: %s", gszLogFileName);
+    vTraceInfo("Start %s function", __func__);
+    vTraceInfo("Log file: %s", gszLogFileName);
   }
 
   printf("Log file: %s\n", gszLogFileName);
 
-  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+  if(INFO_LOG_LEVEL) vTraceInfo("End %s funciton", __func__);
 }
 

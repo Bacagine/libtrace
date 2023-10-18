@@ -9,7 +9,9 @@
 # Date: 2023-09-22
 #
 
-if test -f *.log; then
+if test -f colored.log || test -f debug.log || 
+  test -f hello.log || test -f module.log || 
+  test -f trace.log || test -f trace_level.log; then
   rm -r *.log
 fi
 

@@ -58,7 +58,9 @@ uninstall:
 	./uninstall.sh
 
 test: all $(BINDIR)
+	$(CC) -o $(BINDIR)/hello_log $(TESTDIR)/hello_log.c  $(CFLAGS) $(LDFLAGS) -llog
 	$(CC) -o $(BINDIR)/trace $(TESTDIR)/trace.c  $(CFLAGS) $(LDFLAGS) -llog
+	$(CC) -o $(BINDIR)/trace_level $(TESTDIR)/trace_level.c  $(CFLAGS) $(LDFLAGS) -llog
 	$(CC) -o $(BINDIR)/debug $(TESTDIR)/debug.c  $(CFLAGS) $(LDFLAGS) -llog
 	$(CC) -o $(BINDIR)/colored $(TESTDIR)/colored.c  $(CFLAGS) $(LDFLAGS) -llog
 	$(CC)	-c $(TESTDIR)/module1.c -o $(OBJDIR)/module1.o $(CFLAGS) $(LDFLAGS) -llog

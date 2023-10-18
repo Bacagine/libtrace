@@ -11,12 +11,12 @@ To better understand my codes, read the README.md at [this link](https://github.
 
 ## Log Levels
 
-- INFO    (0): Normal messages
-- WARNING (1): Alert messages
-- ERROR   (2): Errors that not cause the interruption of program
-- FATAL   (3): Erros that cause the interruption of program
-- DEBUG   (4): Detailed messages intended for the programmer
-- TRACE   (5): Messages more detailed than DEBUG level. Show all log level messages
+- INFO_LEVEL    (0): Normal messages
+- WARNING_LEVEL (1): Alert messages
+- ERROR_LEVEL   (2): Errors that not cause the interruption of program
+- FATAL_LEVEL   (3): Erros that cause the interruption of program
+- DEBUG_LEVEL   (4): Detailed messages intended for the programmer
+- TRACE_LEVEL   (5): Messages more detailed than DEBUG_LEVEL level. Show all log level messages
 
 ## Configuration file
 
@@ -84,24 +84,24 @@ int main(int argc, char **argv)
   }
   
   vSetLogFileName("colored.log");
- 
-  if(INFO_LEVEL)
+  
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("start %s function", __func__);
-    vLogInfo("INFO Message"      );
+    vTraceInfo("start %s function", __func__);
+    vTraceInfo("INFO Message"      );
   }
 
-  if(WARNING_LEVEL) vLogWarning("WARNING Message");
-  if(ERROR_LEVEL  ) vLogError("ERROR Message"    );
-  if(FATAL_LEVEL  ) vLogFatal("FATAL Message"    );
+  if(WARNING_LOG_LEVEL) vTraceWarning("WARNING Message");
+  if(ERROR_LOG_LEVEL  ) vTraceError("ERROR Message"    );
+  if(FATAL_LOG_LEVEL  ) vTraceFatal("FATAL Message"    );
   
-  if(DEBUG_LEVEL  ) vLogDebug("argc = %d", argc);
+  if(DEBUG_LOG_LEVEL  ) vTraceDebug("argc = %d", argc);
 
-  if(TRACE_LEVEL  ) vLogTrace("%s(argc = %p, argv = %p)", __func__, &argc, &argv);
+  if(TRACE_LOG_LEVEL  ) vTraceAll("%s(argc = %p, argv = %p)", __func__, &argc, &argv);
   
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("End %s function", __func__);
+    vTraceInfo("End %s function", __func__);
   }
 
   return 0;
@@ -113,7 +113,7 @@ int main(int argc, char **argv)
 
 ```c
 /**
- * debug.c: Exemple of the DEBUG_LEVEL
+ * debug.c: Exemple of the DEBUG_LOG_LEVEL
  * 
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -140,59 +140,59 @@ typedef struct Person
 
 static void vInitPerson(PPerson *ppstPerson)
 {
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("start %s function", __func__);
-    vLogInfo("Setting the default values in members of struct Person");
+    vTraceInfo("start %s function", __func__);
+    vTraceInfo("Setting the default values in members of struct Person");
   }
   
   memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge));
   (*ppstPerson)->uAge = 0;
   
-  if(DEBUG_LEVEL)
+  if(DEBUG_LOG_LEVEL)
   {
-    vLogDebug("memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge))");
-    vLogDebug("(*ppstPerson)->uAge = 0");
+    vTraceDebug("memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge))");
+    vTraceDebug("(*ppstPerson)->uAge = 0");
   }
 
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("end %s function", __func__);
+    vTraceInfo("end %s function", __func__);
   }
 }
   
 static void vCreatePerson(PPerson *ppstPerson, const char *szName, const uint8_t uAge)
 {
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("start %s function", __func__);
-    vLogInfo("create a new person");
+    vTraceInfo("start %s function", __func__);
+    vTraceInfo("create a new person");
   }
 
   strcpy((*ppstPerson)->szName, szName);
   (*ppstPerson)->uAge = uAge;
 
-  if(DEBUG_LEVEL)
+  if(DEBUG_LOG_LEVEL)
   {
-    vLogDebug("Values of the member Person");
-    vLogDebug("(*ppstPerson)->szName = %s", (*ppstPerson)->szName);
-    vLogDebug("(*ppstPerson)->uAge = %d", (*ppstPerson)->uAge);
+    vTraceDebug("Values of the member Person");
+    vTraceDebug("(*ppstPerson)->szName = %s", (*ppstPerson)->szName);
+    vTraceDebug("(*ppstPerson)->uAge = %d", (*ppstPerson)->uAge);
   }
 
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Person created with succes");
-    vLogInfo("end %s function", __func__);
+    vTraceInfo("Person created with succes");
+    vTraceInfo("end %s function", __func__);
   }
 }
 
 static void vShowPerson(PPerson pstPerson)
 {
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("start %s function", __func__);
-    vLogInfo("Show Person");
-    vLogInfo("Name: %s\n"
+    vTraceInfo("start %s function", __func__);
+    vTraceInfo("Show Person");
+    vTraceInfo("Name: %s\n"
              "Age.: %d\n", pstPerson->szName,
                            pstPerson->uAge);
   }
@@ -201,42 +201,42 @@ static void vShowPerson(PPerson pstPerson)
          "Age.: %d\n", pstPerson->szName,
                        pstPerson->uAge);
 
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("end %s function", __func__);
+    vTraceInfo("end %s function", __func__);
   }
 }
 
 static void vDestroyPerson(PPerson *ppstPerson)
 {
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("start %s function", __func__);
+    vTraceInfo("start %s function", __func__);
   }
   
   memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge));
   (*ppstPerson)->uAge = 0;
   
-  if(DEBUG_LEVEL)
+  if(DEBUG_LOG_LEVEL)
   {
-    vLogDebug("memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge))");
-    vLogDebug("(*ppstPerson)->uAge = 0");
-    vLogDebug("Freeing Person structure pointer");
+    vTraceDebug("memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge))");
+    vTraceDebug("(*ppstPerson)->uAge = 0");
+    vTraceDebug("Freeing Person structure pointer");
   }
 
   free((*ppstPerson));
   (*ppstPerson) = NULL;
 
-  if(DEBUG_LEVEL)
+  if(DEBUG_LOG_LEVEL)
   {
-    vLogDebug("free((*ppstPerson))");
-    vLogDebug("(*ppstPerson) = NULL");
-    vLogDebug("Person structure pointer free");
+    vTraceDebug("free((*ppstPerson))");
+    vTraceDebug("(*ppstPerson) = NULL");
+    vTraceDebug("Person structure pointer free");
   }
 
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("end %s function", __func__);
+    vTraceInfo("end %s function", __func__);
   }
 }
 
@@ -267,16 +267,16 @@ int main(int argc, char **argv)
   vSetLogFileName("debug.log");
   
   /* Initial log messages */
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Start of function %s", __func__);
+    vTraceInfo("Start of function %s", __func__);
   }
   
   if(pstPerson == NULL)
   {
-    if(DEBUG_LEVEL)
+    if(DEBUG_LOG_LEVEL)
     {
-      vLogDebug("E: out memory in allocation of pstPerson!");
+      vTraceDebug("E: out memory in allocation of pstPerson!");
     }
   }
 
@@ -289,9 +289,9 @@ int main(int argc, char **argv)
   vDestroyPerson(&pstPerson);
   
   /* End log messages */
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("End of function %s", __func__);
+    vTraceInfo("End of function %s", __func__);
   }
 
   return 0;
@@ -299,11 +299,132 @@ int main(int argc, char **argv)
 
 ```
 
-### Example 3 - trace.c
+### Example 3 - hello_log.c
+```c
+/**
+ * hello_log.c
+ *
+ * Writeen by Gustavo Bacagine <gustavo.bacaigne@protonmail.com>
+ *
+ * Descritpion: Print a hello world in a log file.
+ * 
+ * Date: 23/09/2023
+ */
+
+#include <stdio.h>
+#include "log.h"
+
+#define UNUSED(X) (void) X
+
+int main(int argc, char **argv)
+{
+  UNUSED(argc);
+  UNUSED(argv);
+  UNUSED(kszLogLevelColorEnd);
+  UNUSED(kszLogLevelColorInit);
+  UNUSED(kszLogLevel);
+  
+  vSetConfFileName("log.conf");
+
+  vSetLogLevel(iGetLogLevel());
+
+  if(giDebugLevel < 0)
+  {
+    fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
+
+    exit(EXIT_FAILURE);
+  }
+  
+  vSetLogFileName("hello_log.log");
+
+  if(INFO_LOG_LEVEL)
+  {
+    vTraceInfo("%s - begin", __func__);
+    vTraceInfo("Hello World!!!");
+    vTraceInfo("%s - end", __func__);
+  }
+
+  return 0;
+}
+
+```
+### Example 4 - trace.c
 
 ```c
 /**
- * trace.c: Test to log library with TRACE_LEVEL
+ * trace.c
+ *
+ * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
+ * 
+ * Description: File created to test the new macros:
+ *  vTrace
+ *  vTraceBegin
+ *  vTraceEnd
+ *
+ * Date: 2023-10-17
+ *
+ */
+
+#include <stdio.h>
+#include "log.h"
+
+#define UNUSED(X) (void) X
+
+void vMyFunc(void)
+{
+  vTraceBegin();
+  
+  vTrace(INFO_LEVEL, "INFO MESSAGE");
+  vTrace(WARNING_LEVEL, "WARNING MESSAGE");
+  vTrace(ERROR_LEVEL, "ERROR MESSAGE");
+  vTrace(FATAL_LEVEL, "FATAL MESSAGE");
+  vTrace(DEBUG_LEVEL, "DEBUG MESSAGE");
+  vTrace(TRACE_LEVEL, "TRACE MESSAGE");
+
+  vTraceEnd();
+}
+
+int main(int argc, char **argv)
+{
+  UNUSED(argc);
+  UNUSED(argv);
+  UNUSED(gbColoredLogLevel);
+  UNUSED(gszLogFileName);
+  UNUSED(gszConfFileName);
+  UNUSED(kszLogLevelColorEnd);
+  UNUSED(kszLogLevelColorInit);
+  UNUSED(kszLogLevel);
+
+  vSetConfFileName("log.conf");
+
+  vSetLogLevel(iGetLogLevel());
+
+  if(giDebugLevel < 0)
+  {
+    fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
+
+    exit(EXIT_FAILURE);
+  }
+  
+  vSetLogFileName("trace.log");
+
+  vTraceBegin();
+  
+  vTrace(INFO_LEVEL, "Main Info Message :)");
+
+  vMyFunc();
+
+  vTraceEnd();
+
+  return 0;
+}
+
+```
+
+### Example 5 - trace_level.c
+```c
+/**
+ * trace_level.c: Test to log library with TRACE_LOG_LEVEL
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -337,48 +458,49 @@ int main(int argc, char **argv, char **envp)
     exit(EXIT_FAILURE);
   }
   
-  vSetLogFileName("trace.log");
+  vSetLogFileName("trace_level.log");
 
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("start %s function", __func__);
-    vLogInfo("INFO Message"      );
+    vTraceInfo("start %s function", __func__);
+    vTraceInfo("INFO Message"      );
   }
 
-  if(WARNING_LEVEL) vLogWarning("WARNING Message");
-  if(ERROR_LEVEL  ) vLogError("ERROR Message"    );
-  if(FATAL_LEVEL  ) vLogFatal("FATAL Message"    );
+  if(WARNING_LOG_LEVEL) vTraceWarning("WARNING Message");
+  if(ERROR_LOG_LEVEL  ) vTraceError("ERROR Message"    );
+  if(FATAL_LOG_LEVEL  ) vTraceFatal("FATAL Message"    );
   
-  if(DEBUG_LEVEL  )
+  if(DEBUG_LOG_LEVEL  )
   {
-    vLogDebug("argc = %d", argc);
+    vTraceDebug("argc = %d", argc);
     for(ii = 0; ii < argc; ii++)
     {
-      vLogDebug("argv[%d] = %s", ii, argv[ii]);
+      vTraceDebug("argv[%d] = %s", ii, argv[ii]);
     }
 
     for(ii = 0; envp[ii] != NULL; ii++)
     {
-      vLogDebug("envp[%d] = %s", ii, envp[ii]);
+      vTraceDebug("envp[%d] = %s", ii, envp[ii]);
     }
   }
   
-  if(TRACE_LEVEL  )
+  if(TRACE_LOG_LEVEL  )
   {
-    vLogTrace("TRACE Message");
-    vLogTrace("%s(argc=%p, argv=%p, envp=%p)", __func__, &argc, &argv, &envp);
+    vTraceAll("TRACE Message");
+    vTraceAll("%s(argc=%p, argv=%p, envp=%p)", __func__, &argc, &argv, &envp);
   }
 
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("End %s function", __func__);
+    vTraceInfo("End %s function", __func__);
   }
 
   return 0;
 }
 
 ```
-### Example 4 - Modular programming
+
+### Example 6 - Modular programming
 
 ```c
 /**
@@ -431,14 +553,14 @@ int main(int argc, char **argv)
   
   vSetLogFileName("module.log"); 
   
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Start %s function", __func__);
-    vLogInfo("Debug Level = %d", giDebugLevel);
-    vLogInfo("Colored Log Level = %s", 
+    vTraceInfo("Start %s function", __func__);
+    vTraceInfo("Debug Level = %d", giDebugLevel);
+    vTraceInfo("Colored Log Level = %s", 
       gbColoredLogLevel == true ? "true" : "false");
-    vLogInfo("Configure file: %s", gszConfFileName);
-    vLogInfo("Log file: %s", gszLogFileName);
+    vTraceInfo("Configure file: %s", gszConfFileName);
+    vTraceInfo("Log file: %s", gszLogFileName);
   }
 
   vShowDebugLevel();
@@ -446,7 +568,7 @@ int main(int argc, char **argv)
   vShowConfFileName();
   vShowLogFileName();
   
-  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+  if(INFO_LOG_LEVEL) vTraceInfo("End %s funciton", __func__);
 
   return 0;
 }
@@ -477,15 +599,15 @@ void vShowDebugLevel(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Start %s function", __func__);
-    vLogInfo("Debug Level = %d", giDebugLevel);
+    vTraceInfo("Start %s function", __func__);
+    vTraceInfo("Debug Level = %d", giDebugLevel);
   }
 
   printf("Debug Level = %d\n", giDebugLevel);
 
-  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+  if(INFO_LOG_LEVEL) vTraceInfo("End %s funciton", __func__);
 }
 
 void vShowColoredLogLevel(void)
@@ -496,17 +618,17 @@ void vShowColoredLogLevel(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Start %s function", __func__);
-    vLogInfo("Colored Log Level = %s", 
+    vTraceInfo("Start %s function", __func__);
+    vTraceInfo("Colored Log Level = %s", 
       gbColoredLogLevel == true ? "true" : "false");
   } 
 
   printf("Colored Log Level = %s\n", 
       gbColoredLogLevel == true ? "true" : "false");
 
-  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+  if(INFO_LOG_LEVEL) vTraceInfo("End %s funciton", __func__);
 }
 
 void vShowConfFileName(void)
@@ -517,15 +639,15 @@ void vShowConfFileName(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  if(INFO_LEVEL)
+  if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Start %s function", __func__);
-    vLogInfo("Configure file: %s", gszConfFileName);
+    vTraceInfo("Start %s function", __func__);
+    vTraceInfo("Configure file: %s", gszConfFileName);
   }
 
   printf("Configure file: %s\n", gszConfFileName);
 
-  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+  if(INFO_LOG_LEVEL) vTraceInfo("End %s funciton", __func__);
 }
 
 void vShowLogFileName(void)
@@ -536,15 +658,15 @@ void vShowLogFileName(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
- if(INFO_LEVEL)
+ if(INFO_LOG_LEVEL)
   {
-    vLogInfo("Start %s function", __func__);
-    vLogInfo("Log file: %s", gszLogFileName);
+    vTraceInfo("Start %s function", __func__);
+    vTraceInfo("Log file: %s", gszLogFileName);
   }
 
   printf("Log file: %s\n", gszLogFileName);
 
-  if(INFO_LEVEL) vLogInfo("End %s funciton", __func__);
+  if(INFO_LOG_LEVEL) vTraceInfo("End %s funciton", __func__);
 }
 
 ```
@@ -554,7 +676,9 @@ void vShowLogFileName(void)
 ```
 $ gcc -o colored colored.c -llog
 $ gcc -o debug debug.c -llog
+$ gcc -o hello_log hello_log.c -llog
 $ gcc -o trace trace.c -llog
+$ gcc -o trace_level trace_level.c -llog
 $ gcc -c module1.c -o module1.o -llog
 $ gcc -c module2.c -o module2.o -llog
 $ gcc -o module module1.o module2.o -llog
