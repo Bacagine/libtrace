@@ -20,7 +20,7 @@ void vSetConfFileName(const char *kszConfFileName)
     exit(EXIT_FAILURE);
   }
   
-  sprintf(gszConfFileName, "%s", kszConfFileName); 
+  snprintf(gszConfFileName, sizeof(gszConfFileName), "%s", kszConfFileName); 
 }
 
 void vSetLogFileName(const char *kszLogFileName)
@@ -31,7 +31,7 @@ void vSetLogFileName(const char *kszLogFileName)
     exit(EXIT_FAILURE);
   }
   
-  sprintf(gszLogFileName, "%s", kszLogFileName); 
+  snprintf(gszLogFileName, sizeof(gszLogFileName), "%s", kszLogFileName); 
 }
 
 void vSetColoredLogLevel(bool bColored)
@@ -67,14 +67,14 @@ void _vTrace(DebugLevel usiDebugLevel,
   
   va_start(args, kpszFmt);
   
-  sprintf(szDbg, "%04d/%02d/%02d %02d:%02d:%02d %s:%d", stTime->tm_year + 1900, 
-                                                        stTime->tm_mon + 1, 
-                                                        stTime->tm_mday,
-                                                        stTime->tm_hour,
-                                                        stTime->tm_min,
-                                                        stTime->tm_sec,
-                                                        kpszModuleName,
-                                                        kiLine
+  snprintf(szDbg, sizeof(szDbg), "%04d/%02d/%02d %02d:%02d:%02d %s:%d", stTime->tm_year + 1900, 
+                                                                        stTime->tm_mon + 1, 
+                                                                        stTime->tm_mday,
+                                                                        stTime->tm_hour,
+                                                                        stTime->tm_min,
+                                                                        stTime->tm_sec,
+                                                                        kpszModuleName,
+                                                                        kiLine
   );
 
   switch(usiDebugLevel)
@@ -330,7 +330,7 @@ int iGetLogLevel(void)
             return -2;
           }
 
-          sprintf(szLevel, "%s", pToken);
+          snprintf(szLevel, sizeof(szLevel), "%s", pToken);
           iDebugLevel = atoi(szLevel);
           
           break;
@@ -433,7 +433,7 @@ int iGetColoredLogLevel(void)
             return -2;
           }
 
-          sprintf(szBool, "%s", pToken);
+          snprintf(szBool, sizeof(szBool), "%s", pToken);
           szBool[strcspn(szBool, "\n")] = 0;
           
           break;
