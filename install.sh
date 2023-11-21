@@ -10,7 +10,7 @@
 #
 
 gzip ./man/log.1
-#gzip ./doc/*
+gzip ./doc/liblog-user-guide.pdf
 gzip ./ChangeLog
 gzip ./LICENSE
 gzip ./AUTHORS
@@ -23,6 +23,6 @@ cp -r lib/liblog.so /usr/lib/liblog.so
 cp -r ./man/log.1.gz /usr/share/man/man1
 
 mkdir /usr/share/doc/log
-cp -r ./doc/* /usr/share/doc/log
+cp -r ./doc/*.gz /usr/share/doc/log
 cp -r ./ChangeLog.gz ./LICENSE.gz ./AUTHORS.gz ./NEWS.gz ./README.gz ./INSTALL.gz /usr/share/doc/log
 
