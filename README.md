@@ -85,21 +85,21 @@ int main(int argc, char **argv)
   
   vSetLogFileName("colored.log");
   
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("start %s function", __func__);
     vTraceInfo("INFO Message"      );
   }
 
-  if(WARNING_LOG_DETAILS) vTraceWarning("WARNING Message");
-  if(ERROR_LOG_DETAILS  ) vTraceError("ERROR Message"    );
-  if(FATAL_LOG_DETAILS  ) vTraceFatal("FATAL Message"    );
+  if(WARNING_DETAILS) vTraceWarning("WARNING Message");
+  if(ERROR_DETAILS  ) vTraceError("ERROR Message"    );
+  if(FATAL_DETAILS  ) vTraceFatal("FATAL Message"    );
   
-  if(DEBUG_LOG_DETAILS  ) vTraceDebug("argc = %d", argc);
+  if(DEBUG_DETAILS  ) vTraceDebug("argc = %d", argc);
 
-  if(TRACE_LOG_DETAILS  ) vTraceAll("%s(argc = %p, argv = %p)", __func__, &argc, &argv);
+  if(TRACE_DETAILS  ) vTraceAll("%s(argc = %p, argv = %p)", __func__, &argc, &argv);
   
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("End %s function", __func__);
   }
@@ -113,7 +113,7 @@ int main(int argc, char **argv)
 
 ```c
 /**
- * debug.c: Exemple of the DEBUG_LOG_DETAILS
+ * debug.c: Exemple of the DEBUG_DETAILS
  * 
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -140,7 +140,7 @@ typedef struct Person
 
 static void vInitPerson(PPerson *ppstPerson)
 {
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("start %s function", __func__);
     vTraceInfo("Setting the default values in members of struct Person");
@@ -149,13 +149,13 @@ static void vInitPerson(PPerson *ppstPerson)
   memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge));
   (*ppstPerson)->uAge = 0;
   
-  if(DEBUG_LOG_DETAILS)
+  if(DEBUG_DETAILS)
   {
     vTraceDebug("memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge))");
     vTraceDebug("(*ppstPerson)->uAge = 0");
   }
 
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("end %s function", __func__);
   }
@@ -163,7 +163,7 @@ static void vInitPerson(PPerson *ppstPerson)
   
 static void vCreatePerson(PPerson *ppstPerson, const char *szName, const uint8_t uAge)
 {
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("start %s function", __func__);
     vTraceInfo("create a new person");
@@ -172,14 +172,14 @@ static void vCreatePerson(PPerson *ppstPerson, const char *szName, const uint8_t
   strcpy((*ppstPerson)->szName, szName);
   (*ppstPerson)->uAge = uAge;
 
-  if(DEBUG_LOG_DETAILS)
+  if(DEBUG_DETAILS)
   {
     vTraceDebug("Values of the member Person");
     vTraceDebug("(*ppstPerson)->szName = %s", (*ppstPerson)->szName);
     vTraceDebug("(*ppstPerson)->uAge = %d", (*ppstPerson)->uAge);
   }
 
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("Person created with succes");
     vTraceInfo("end %s function", __func__);
@@ -188,7 +188,7 @@ static void vCreatePerson(PPerson *ppstPerson, const char *szName, const uint8_t
 
 static void vShowPerson(PPerson pstPerson)
 {
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("start %s function", __func__);
     vTraceInfo("Show Person");
@@ -201,7 +201,7 @@ static void vShowPerson(PPerson pstPerson)
          "Age.: %d\n", pstPerson->szName,
                        pstPerson->uAge);
 
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("end %s function", __func__);
   }
@@ -209,7 +209,7 @@ static void vShowPerson(PPerson pstPerson)
 
 static void vDestroyPerson(PPerson *ppstPerson)
 {
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("start %s function", __func__);
   }
@@ -217,7 +217,7 @@ static void vDestroyPerson(PPerson *ppstPerson)
   memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge));
   (*ppstPerson)->uAge = 0;
   
-  if(DEBUG_LOG_DETAILS)
+  if(DEBUG_DETAILS)
   {
     vTraceDebug("memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge))");
     vTraceDebug("(*ppstPerson)->uAge = 0");
@@ -227,14 +227,14 @@ static void vDestroyPerson(PPerson *ppstPerson)
   free((*ppstPerson));
   (*ppstPerson) = NULL;
 
-  if(DEBUG_LOG_DETAILS)
+  if(DEBUG_DETAILS)
   {
     vTraceDebug("free((*ppstPerson))");
     vTraceDebug("(*ppstPerson) = NULL");
     vTraceDebug("Person structure pointer free");
   }
 
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("end %s function", __func__);
   }
@@ -267,14 +267,14 @@ int main(int argc, char **argv)
   vSetLogFileName("debug.log");
   
   /* Initial log messages */
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("Start of function %s", __func__);
   }
   
   if(pstPerson == NULL)
   {
-    if(DEBUG_LOG_DETAILS)
+    if(DEBUG_DETAILS)
     {
       vTraceDebug("E: out memory in allocation of pstPerson!");
     }
@@ -289,7 +289,7 @@ int main(int argc, char **argv)
   vDestroyPerson(&pstPerson);
   
   /* End log messages */
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("End of function %s", __func__);
   }
@@ -337,7 +337,7 @@ int main(int argc, char **argv)
   
   vSetLogFileName("hello_log.log");
 
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("%s - begin", __func__);
     vTraceInfo("Hello World!!!");
@@ -424,7 +424,7 @@ int main(int argc, char **argv)
 ### Example 5 - trace_level.c
 ```c
 /**
- * trace_level.c: Test to log library with TRACE_LOG_DETAILS
+ * trace_level.c: Test to log library with TRACE_DETAILS
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -460,17 +460,17 @@ int main(int argc, char **argv, char **envp)
   
   vSetLogFileName("trace_level.log");
 
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("start %s function", __func__);
     vTraceInfo("INFO Message"      );
   }
 
-  if(WARNING_LOG_DETAILS) vTraceWarning("WARNING Message");
-  if(ERROR_LOG_DETAILS  ) vTraceError("ERROR Message"    );
-  if(FATAL_LOG_DETAILS  ) vTraceFatal("FATAL Message"    );
+  if(WARNING_DETAILS) vTraceWarning("WARNING Message");
+  if(ERROR_DETAILS  ) vTraceError("ERROR Message"    );
+  if(FATAL_DETAILS  ) vTraceFatal("FATAL Message"    );
   
-  if(DEBUG_LOG_DETAILS  )
+  if(DEBUG_DETAILS  )
   {
     vTraceDebug("argc = %d", argc);
     for(ii = 0; ii < argc; ii++)
@@ -484,13 +484,13 @@ int main(int argc, char **argv, char **envp)
     }
   }
   
-  if(TRACE_LOG_DETAILS  )
+  if(TRACE_DETAILS  )
   {
     vTraceAll("TRACE Message");
     vTraceAll("%s(argc=%p, argv=%p, envp=%p)", __func__, &argc, &argv, &envp);
   }
 
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("End %s function", __func__);
   }
@@ -553,7 +553,7 @@ int main(int argc, char **argv)
   
   vSetLogFileName("module.log"); 
   
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("Start %s function", __func__);
     vTraceInfo("Debug Level = %d", giDebugLevel);
@@ -568,7 +568,7 @@ int main(int argc, char **argv)
   vShowConfFileName();
   vShowLogFileName();
   
-  if(INFO_LOG_DETAILS) vTraceInfo("End %s funciton", __func__);
+  if(INFO_DETAILS) vTraceInfo("End %s funciton", __func__);
 
   return 0;
 }
@@ -599,7 +599,7 @@ void vShowDebugLevel(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("Start %s function", __func__);
     vTraceInfo("Debug Level = %d", giDebugLevel);
@@ -607,7 +607,7 @@ void vShowDebugLevel(void)
 
   printf("Debug Level = %d\n", giDebugLevel);
 
-  if(INFO_LOG_DETAILS) vTraceInfo("End %s funciton", __func__);
+  if(INFO_DETAILS) vTraceInfo("End %s funciton", __func__);
 }
 
 void vShowColoredLogLevel(void)
@@ -618,7 +618,7 @@ void vShowColoredLogLevel(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("Start %s function", __func__);
     vTraceInfo("Colored Log Level = %s", 
@@ -628,7 +628,7 @@ void vShowColoredLogLevel(void)
   printf("Colored Log Level = %s\n", 
       gbColoredLogLevel == true ? "true" : "false");
 
-  if(INFO_LOG_DETAILS) vTraceInfo("End %s funciton", __func__);
+  if(INFO_DETAILS) vTraceInfo("End %s funciton", __func__);
 }
 
 void vShowConfFileName(void)
@@ -639,7 +639,7 @@ void vShowConfFileName(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("Start %s function", __func__);
     vTraceInfo("Configure file: %s", gszConfFileName);
@@ -647,7 +647,7 @@ void vShowConfFileName(void)
 
   printf("Configure file: %s\n", gszConfFileName);
 
-  if(INFO_LOG_DETAILS) vTraceInfo("End %s funciton", __func__);
+  if(INFO_DETAILS) vTraceInfo("End %s funciton", __func__);
 }
 
 void vShowLogFileName(void)
@@ -658,7 +658,7 @@ void vShowLogFileName(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
- if(INFO_LOG_DETAILS)
+ if(INFO_DETAILS)
   {
     vTraceInfo("Start %s function", __func__);
     vTraceInfo("Log file: %s", gszLogFileName);
@@ -666,7 +666,7 @@ void vShowLogFileName(void)
 
   printf("Log file: %s\n", gszLogFileName);
 
-  if(INFO_LOG_DETAILS) vTraceInfo("End %s funciton", __func__);
+  if(INFO_DETAILS) vTraceInfo("End %s funciton", __func__);
 }
 
 ```

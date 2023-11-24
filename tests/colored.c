@@ -44,21 +44,21 @@ int main(int argc, char **argv)
   
   vSetLogFileName("colored.log");
   
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("start %s function", __func__);
     vTraceInfo("INFO Message"      );
   }
 
-  if(WARNING_LOG_DETAILS) vTraceWarning("WARNING Message");
-  if(ERROR_LOG_DETAILS  ) vTraceError("ERROR Message"    );
-  if(FATAL_LOG_DETAILS  ) vTraceFatal("FATAL Message"    );
+  if(WARNING_DETAILS) vTraceWarning("WARNING Message");
+  if(ERROR_DETAILS  ) vTraceError("ERROR Message"    );
+  if(FATAL_DETAILS  ) vTraceFatal("FATAL Message"    );
   
-  if(DEBUG_LOG_DETAILS  ) vTraceDebug("argc = %d", argc);
+  if(DEBUG_DETAILS  ) vTraceDebug("argc = %d", argc);
 
-  if(TRACE_LOG_DETAILS  ) vTraceAll("%s(argc = %p, argv = %p)", __func__, &argc, &argv);
+  if(TRACE_DETAILS  ) vTraceAll("%s(argc = %p, argv = %p)", __func__, &argc, &argv);
   
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("End %s function", __func__);
   }

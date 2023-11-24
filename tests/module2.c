@@ -21,7 +21,7 @@ void vShowDebugLevel(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("Start %s function", __func__);
     vTraceInfo("Debug Level = %d", giDebugLevel);
@@ -29,7 +29,7 @@ void vShowDebugLevel(void)
 
   printf("Debug Level = %d\n", giDebugLevel);
 
-  if(INFO_LOG_DETAILS) vTraceInfo("End %s funciton", __func__);
+  if(INFO_DETAILS) vTraceInfo("End %s funciton", __func__);
 }
 
 void vShowColoredLogLevel(void)
@@ -40,7 +40,7 @@ void vShowColoredLogLevel(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("Start %s function", __func__);
     vTraceInfo("Colored Log Level = %s", 
@@ -50,7 +50,7 @@ void vShowColoredLogLevel(void)
   printf("Colored Log Level = %s\n", 
       gbColoredLogLevel == true ? "true" : "false");
 
-  if(INFO_LOG_DETAILS) vTraceInfo("End %s funciton", __func__);
+  if(INFO_DETAILS) vTraceInfo("End %s funciton", __func__);
 }
 
 void vShowConfFileName(void)
@@ -61,7 +61,7 @@ void vShowConfFileName(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("Start %s function", __func__);
     vTraceInfo("Configure file: %s", gszConfFileName);
@@ -69,7 +69,7 @@ void vShowConfFileName(void)
 
   printf("Configure file: %s\n", gszConfFileName);
 
-  if(INFO_LOG_DETAILS) vTraceInfo("End %s funciton", __func__);
+  if(INFO_DETAILS) vTraceInfo("End %s funciton", __func__);
 }
 
 void vShowLogFileName(void)
@@ -80,7 +80,7 @@ void vShowLogFileName(void)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
- if(INFO_LOG_DETAILS)
+ if(INFO_DETAILS)
   {
     vTraceInfo("Start %s function", __func__);
     vTraceInfo("Log file: %s", gszLogFileName);
@@ -88,6 +88,6 @@ void vShowLogFileName(void)
 
   printf("Log file: %s\n", gszLogFileName);
 
-  if(INFO_LOG_DETAILS) vTraceInfo("End %s funciton", __func__);
+  if(INFO_DETAILS) vTraceInfo("End %s funciton", __func__);
 }
 

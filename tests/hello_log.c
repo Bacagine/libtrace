@@ -34,7 +34,7 @@ int main(int argc, char **argv)
   
   vSetLogFileName("hello_log.log");
 
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("%s - begin", __func__);
     vTraceInfo("Hello World!!!");

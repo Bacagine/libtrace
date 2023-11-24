@@ -48,7 +48,7 @@ int main(int argc, char **argv)
   
   vSetLogFileName("module.log"); 
   
-  if(INFO_LOG_DETAILS)
+  if(INFO_DETAILS)
   {
     vTraceInfo("Start %s function", __func__);
     vTraceInfo("Debug Level = %d", giDebugLevel);
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
   vShowConfFileName();
   vShowLogFileName();
   
-  if(INFO_LOG_DETAILS) vTraceInfo("End %s funciton", __func__);
+  if(INFO_DETAILS) vTraceInfo("End %s funciton", __func__);
 
   return 0;
 }
