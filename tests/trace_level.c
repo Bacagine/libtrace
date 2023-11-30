@@ -1,5 +1,5 @@
 /**
- * trace_level.c: Test to log library with TRACE_DETAILS
+ * trace_level.c: Test to trace library with TRACE_DETAILS
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -7,7 +7,7 @@
  */
 
 #include <stdio.h>
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 
@@ -22,7 +22,7 @@ int main(int argc, char **argv, char **envp)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
 
-  vSetConfFileName("log.conf");
+  vSetConfFileName("trace.conf");
 
   vSetLogLevel(iGetLogLevel());
 

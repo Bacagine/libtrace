@@ -1,5 +1,5 @@
 /**
- * colored.c: Test to log library, using colored log level
+ * colored.c: Test to trace library, using colored trace level
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -7,7 +7,7 @@
  */
 
 #include <stdio.h>
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
 
-  vSetConfFileName("log.conf");
+  vSetConfFileName("trace.conf");
 
   vSetLogLevel(iGetLogLevel());
 

@@ -1,15 +1,15 @@
 /**
- * hello_log.c
+ * hello_trace.c
  *
  * Writeen by Gustavo Bacagine <gustavo.bacaigne@protonmail.com>
  *
- * Descritpion: Print a hello world in a log file.
+ * Descritpion: Print a hello world in a trace file.
  * 
  * Date: 23/09/2023
  */
 
 #include <stdio.h>
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 
@@ -21,7 +21,7 @@ int main(int argc, char **argv)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  vSetConfFileName("log.conf");
+  vSetConfFileName("trace.conf");
 
   vSetLogLevel(iGetLogLevel());
 
@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     exit(EXIT_FAILURE);
   }
   
-  vSetLogFileName("hello_log.log");
+  vSetLogFileName("hello_trace.log");
 
   if(INFO_DETAILS)
   {

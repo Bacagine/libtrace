@@ -1,5 +1,5 @@
 /**
- * module1.c: Test to log library, using modular programming
+ * module1.c: Test to trace library, using modular programming
  *
  * This file is module 1 of 2
  *
@@ -9,7 +9,7 @@
  */
 
 #include <stdio.h>
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
  
-  vSetConfFileName("log.conf");
+  vSetConfFileName("trace.conf");
 
   vSetLogLevel(iGetLogLevel());
 

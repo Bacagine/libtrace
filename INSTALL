@@ -1,4 +1,4 @@
-Installation proccess of liblog
+Installation proccess of libtrace
 
 $ sudo ./mkinstall  # Compile and install the software
 

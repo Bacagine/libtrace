@@ -1,5 +1,5 @@
 /**
- * module2.c: Test to log library, using modular programming
+ * module2.c: Test to trace library, using modular programming
  *
  * This file is module 2 of 2
  *
@@ -8,7 +8,7 @@
  * Date: 2023-09-14
  */
 
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 

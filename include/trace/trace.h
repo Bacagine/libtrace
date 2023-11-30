@@ -1,4 +1,5 @@
-/* log.h: This file contains constants and functions to create 
+/**
+ * trace.h: This file contains constants and functions to create 
  * .log files
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmai.com>
@@ -6,8 +7,8 @@
  * Date: 2023-06-16
  */
 
-#ifndef _LOG_H_
-#define _LOG_H_
+#ifndef _TRACE_H_
+#define _TRACE_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,15 +18,12 @@
 #include <time.h>
 #include <errno.h>
 
-#define CONF_FILE_NAME_LENGTH 256
-#define LOG_FILE_NAME_LENGTH  256
-
 #define INFO_LEVEL    0 /* Normal messages                                      */
 #define WARNING_LEVEL 1 /* Warning alert messages                               */
 #define ERROR_LEVEL   2 /* Error messages                                       */
 #define FATAL_LEVEL   3 /* Fatal error messages                                 */
 #define DEBUG_LEVEL   4 /* Messages with more information about the source code */
-#define TRACE_LEVEL   5 /* Show all messages in log                             */
+#define TRACE_LEVEL   5 /* Show all messages in trace                             */
 
 /**
  * Example of use:
@@ -103,12 +101,12 @@ static const char *kszLogLevelColorEnd[] = {
 /**
  * Receive the name of .conf file
  */
-extern char gszConfFileName[LOG_FILE_NAME_LENGTH];
+extern char gszConfFileName[256];
 
 /**
- * Receive the name of .log file
+ * Receive the name of .trace file
  */
-extern char gszLogFileName[LOG_FILE_NAME_LENGTH]; 
+extern char gszLogFileName[256]; 
 
 /**
  * Receive the level of debug from .conf 
@@ -117,7 +115,7 @@ extern char gszLogFileName[LOG_FILE_NAME_LENGTH];
 extern DebugLevel giDebugLevel;
 
 /**
- * Receive if the log level tag is colored 
+ * Receive if the trace level tag is colored 
  * or not, the default is without color
  */
 extern bool gbColoredLogLevel;
@@ -129,12 +127,12 @@ extern bool gbColoredLogLevel;
 void vSetConfFileName(const char *kszConfFile);
 
 /**
- * Set the name of log file
+ * Set the name of trace file
  */
 void vSetLogFileName(const char *kszLogFileName);
 
 /** 
- * Enable or disable log level with 
+ * Enable or disable trace level with 
  * colored and bold
  */
 void vSetColoredLogLevel(bool bColored);
@@ -145,7 +143,7 @@ void vSetColoredLogLevel(bool bColored);
 void vSetLogLevel(DebugLevel usiDebugLevel);
 
 /**
- * Get the log level from file.
+ * Get the trace level from file.
  * 
  * return values:
  * 0 - 6 = Log Level
@@ -157,11 +155,11 @@ void vSetLogLevel(DebugLevel usiDebugLevel);
 int iGetLogLevel(void);
 
 /**
- * Get the colored log level from file.
+ * Get the colored trace level from file.
  * 
  * return values:
- *  0 is fals, no color in log level
- *  1 is true, colored in log level
+ *  0 is fals, no color in trace level
+ *  1 is true, colored in trace level
  * -1 if can't open the file.
  * -2 if COLORED_LOG_LEVEL is empty in file
  * -3 if don't found COLORED_LOG_LEVEL variable in file
@@ -170,12 +168,12 @@ int iGetLogLevel(void);
 int iGetColoredLogLevel(void);
 
 /**
- * Print a log message with the log level between [].
+ * Print a trace message with the trace level between [].
  */
 void _vTrace(const DebugLevel usiDebugLevel,
              const char *kpszModuleName,
              const int kiLine,
              const char *kpszFmt, ...);
 
-#endif /* _LOG_H_ */
+#endif /* _TRACE_H_ */
 

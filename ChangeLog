@@ -1,3 +1,5 @@
+30/11/2023 - Changed the name of the library and the source files
+
 22/09/2023 - Removed wrong information about the installation of the library
 22/09/2023 - Created the man page of the log C library
 22/09/2023 - Add the fowllowing scripts: install.sh, uninstall.sh and

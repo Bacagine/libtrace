@@ -1,6 +1,6 @@
 make distclean
 
-gunzip ./man/log.1.gz
+gunzip ./man/trace.1.gz
 #gunzip ./doc/*.gz
 gunzip ./ChangeLog.gz
 gunzip ./LICENSE.gz

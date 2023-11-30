@@ -1,6 +1,6 @@
 This file contains a tree and a explanation about the files of the project
 
-log
+trace
 ├── AUTHORS
 ├── ChangeLog
 ├── INSTALL
@@ -11,14 +11,14 @@ log
 ├── README.md
 ├── doc
 │   └── img
-│       └── log.png
+│       └── trace.png
 ├── include
-│   └── log
-│       └── log.h
+│   └── trace
+│       └── trace.h
 ├── install.sh
-├── log.conf
+├── trace.conf
 ├── man
-│   └── log.1
+│   └── trace.1
 ├── mk
 ├── mkall
 ├── mkclean
@@ -30,11 +30,11 @@ log
 ├── mkuninstall
 ├── remove_logs.sh
 ├── src
-│   └── log.c
+│   └── trace.c
 ├── tests
 │   ├── colored.c
 │   ├── debug.c
-│   ├── hello_log.log
+│   ├── hello_log.c
 │   ├── module1.c
 │   ├── module2.c
 │   ├── trace.c
@@ -51,10 +51,10 @@ Makefile......: Makefile of the project
 NEWS..........: File content the news about the project
 README........: This file containing a explanation about the files of project
 README.md.....: The README of github
-log.h.........: Header file of the library
+trace.h.......: Header file of the library
 install.sh....: Installation script
-log.conf......: A .conf example file to use the log library in your C programs
-log.1.........: A man page of the library and your functions
+trace.conf....: A .conf example file to use the trace library in your C programs
+trace.1.......: A man page of the library and your functions
 mk............: A make script
 mkall.........: make all script
 mkclean.......: make clean script
@@ -65,6 +65,6 @@ mkinstall.....: make install script
 mktest........: make test script
 mkuninstall...: make uninstall script
 remove_logs.sh: script to remove all .log files in current directory
-log.c.........: C source file of the library
+trace.c.........: C source file of the library
 uninstall.sh..: Uninstall script of the software
 

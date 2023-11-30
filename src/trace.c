@@ -1,14 +1,15 @@
-/* log.c: This file contains the implementation of logger functions
+/**
+ * trace.c: This file contains the implementation of traceger functions
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  *
  * Date: 2023-06-16
  */
 
-#include "log.h"
+#include "trace.h"
 
-char gszConfFileName[LOG_FILE_NAME_LENGTH];
-char gszLogFileName[LOG_FILE_NAME_LENGTH];
+char gszConfFileName[256];
+char gszLogFileName[256];
 DebugLevel giDebugLevel = 0;
 bool gbColoredLogLevel = false;
 
@@ -16,7 +17,8 @@ void vSetConfFileName(const char *kszConfFileName)
 {
   if(sizeof(kszConfFileName) > sizeof(gszConfFileName))
   {
-    fprintf(stderr, "E: The name of configuraation file is bigger than %d", CONF_FILE_NAME_LENGTH);
+    fprintf(stderr, "E: The name of configuraation file is bigger than %d", 256);
+
     exit(EXIT_FAILURE);
   }
   
@@ -27,7 +29,8 @@ void vSetLogFileName(const char *kszLogFileName)
 {
   if(sizeof(kszLogFileName) > sizeof(gszLogFileName))
   {
-    fprintf(stderr, "E: The name of log file is bigger than %d", LOG_FILE_NAME_LENGTH);
+    fprintf(stderr, "E: The name of trace file is bigger than %d", 256);
+
     exit(EXIT_FAILURE);
   }
   
@@ -364,7 +367,7 @@ int iGetLogLevel(void)
   /* If LOG_LEVEL in file is incorret */
   if(iDebugLevel < 0 || iDebugLevel > 5)
   {
-    fprintf(stderr, "E: Invalid value of log level in file %s!\n", gszConfFileName);
+    fprintf(stderr, "E: Invalid value of trace level in file %s!\n", gszConfFileName);
         
     fclose(fpLogConfFile);
     fpLogConfFile = NULL;
@@ -475,7 +478,7 @@ int iGetColoredLogLevel(void)
   }
   else
   {
-    fprintf(stderr, "E: Invalid value of colored log level in file %s!\n", gszConfFileName);
+    fprintf(stderr, "E: Invalid value of colored trace level in file %s!\n", gszConfFileName);
 
     iReturnValue = -4;
   }

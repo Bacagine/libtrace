@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 
@@ -139,7 +139,7 @@ int main(int argc, char **argv)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  vSetConfFileName("log.conf");
+  vSetConfFileName("trace.conf");
   
   vSetLogLevel(iGetLogLevel());
 
@@ -152,7 +152,7 @@ int main(int argc, char **argv)
   
   vSetLogFileName("debug.log");
   
-  /* Initial log messages */
+  /* Initial trace messages */
   if(INFO_DETAILS)
   {
     vTraceInfo("Start of function %s", __func__);
@@ -174,7 +174,7 @@ int main(int argc, char **argv)
 
   vDestroyPerson(&pstPerson);
   
-  /* End log messages */
+  /* End trace messages */
   if(INFO_DETAILS)
   {
     vTraceInfo("End of function %s", __func__);

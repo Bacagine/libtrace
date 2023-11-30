@@ -1,6 +1,6 @@
-# LOG
+# libtrace
 
-![Colored Logger](doc/img/log.png)
+![Colored Logger](doc/img/trace.png)
 
 My personal debug library for my C/C++ programs
 
@@ -16,7 +16,7 @@ To better understand my codes, read the README.md at [this link](https://github.
 - ERROR_LEVEL   (2): Errors that not cause the interruption of program
 - FATAL_LEVEL   (3): Erros that cause the interruption of program
 - DEBUG_LEVEL   (4): Detailed messages intended for the programmer
-- TRACE_LEVEL   (5): Messages more detailed than DEBUG_LEVEL level. Show all log level messages
+- TRACE_LEVEL   (5): Messages more detailed than DEBUG_LEVEL level. Show all trace level messages
 
 ## Configuration file
 
@@ -40,7 +40,7 @@ COLORED_LOG_LEVEL = false
 ### Example 1 - colored.c
 ```c
 /**
- * colored.c: Test to log library, using colored log level
+ * colored.c: Test to trace library, using colored trace level
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -48,7 +48,7 @@ COLORED_LOG_LEVEL = false
  */
 
 #include <stdio.h>
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
 
-  vSetConfFileName("log.conf");
+  vSetConfFileName("trace.conf");
 
   vSetLogLevel(iGetLogLevel());
 
@@ -124,7 +124,7 @@ int main(int argc, char **argv)
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 
@@ -253,7 +253,7 @@ int main(int argc, char **argv)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  vSetConfFileName("log.conf");
+  vSetConfFileName("trace.conf");
   
   vSetLogLevel(iGetLogLevel());
 
@@ -266,7 +266,7 @@ int main(int argc, char **argv)
   
   vSetLogFileName("debug.log");
   
-  /* Initial log messages */
+  /* Initial trace messages */
   if(INFO_DETAILS)
   {
     vTraceInfo("Start of function %s", __func__);
@@ -288,7 +288,7 @@ int main(int argc, char **argv)
 
   vDestroyPerson(&pstPerson);
   
-  /* End log messages */
+  /* End trace messages */
   if(INFO_DETAILS)
   {
     vTraceInfo("End of function %s", __func__);
@@ -299,20 +299,20 @@ int main(int argc, char **argv)
 
 ```
 
-### Example 3 - hello_log.c
+### Example 3 - hello_trace.c
 ```c
 /**
- * hello_log.c
+ * hello_trace.c
  *
  * Writeen by Gustavo Bacagine <gustavo.bacaigne@protonmail.com>
  *
- * Descritpion: Print a hello world in a log file.
+ * Descritpion: Print a hello world in a trace file.
  * 
  * Date: 23/09/2023
  */
 
 #include <stdio.h>
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 
@@ -324,7 +324,7 @@ int main(int argc, char **argv)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
   
-  vSetConfFileName("log.conf");
+  vSetConfFileName("trace.conf");
 
   vSetLogLevel(iGetLogLevel());
 
@@ -335,7 +335,7 @@ int main(int argc, char **argv)
     exit(EXIT_FAILURE);
   }
   
-  vSetLogFileName("hello_log.log");
+  vSetLogFileName("hello_trace.log");
 
   if(INFO_DETAILS)
   {
@@ -366,7 +366,7 @@ int main(int argc, char **argv)
  */
 
 #include <stdio.h>
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 
@@ -395,7 +395,7 @@ int main(int argc, char **argv)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
 
-  vSetConfFileName("log.conf");
+  vSetConfFileName("trace.conf");
 
   vSetLogLevel(iGetLogLevel());
 
@@ -424,7 +424,7 @@ int main(int argc, char **argv)
 ### Example 5 - trace_level.c
 ```c
 /**
- * trace_level.c: Test to log library with TRACE_DETAILS
+ * trace_level.c: Test to trace library with TRACE_DETAILS
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -432,7 +432,7 @@ int main(int argc, char **argv)
  */
 
 #include <stdio.h>
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 
@@ -447,7 +447,7 @@ int main(int argc, char **argv, char **envp)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
 
-  vSetConfFileName("log.conf");
+  vSetConfFileName("trace.conf");
 
   vSetLogLevel(iGetLogLevel());
 
@@ -504,7 +504,7 @@ int main(int argc, char **argv, char **envp)
 
 ```c
 /**
- * module1.c: Test to log library, using modular programming
+ * module1.c: Test to trace library, using modular programming
  *
  * This file is module 1 of 2
  *
@@ -514,7 +514,7 @@ int main(int argc, char **argv, char **envp)
  */
 
 #include <stdio.h>
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 
@@ -533,7 +533,7 @@ int main(int argc, char **argv)
   UNUSED(kszLogLevelColorInit);
   UNUSED(kszLogLevel);
  
-  vSetConfFileName("log.conf");
+  vSetConfFileName("trace.conf");
 
   vSetLogLevel(iGetLogLevel());
 
@@ -577,7 +577,7 @@ int main(int argc, char **argv)
 
 ```c
 /**
- * module2.c: Test to log library, using modular programming
+ * module2.c: Test to trace library, using modular programming
  *
  * This file is module 2 of 2
  *
@@ -586,7 +586,7 @@ int main(int argc, char **argv)
  * Date: 2023-09-14
  */
 
-#include "log.h"
+#include "trace.h"
 
 #define UNUSED(X) (void) X
 
@@ -674,14 +674,14 @@ void vShowLogFileName(void)
 ### Compile the codes
 
 ```
-$ gcc -o colored colored.c -llog
-$ gcc -o debug debug.c -llog
-$ gcc -o hello_log hello_log.c -llog
-$ gcc -o trace trace.c -llog
-$ gcc -o trace_level trace_level.c -llog
-$ gcc -c module1.c -o module1.o -llog
-$ gcc -c module2.c -o module2.o -llog
-$ gcc -o module module1.o module2.o -llog
+$ gcc -o colored colored.c -ltrace
+$ gcc -o debug debug.c -ltrace
+$ gcc -o hello_trace hello_trace.c -ltrace
+$ gcc -o trace trace.c -ltrace
+$ gcc -o trace_level trace_level.c -ltrace
+$ gcc -c module1.c -o module1.o -ltrace
+$ gcc -c module2.c -o module2.o -ltrace
+$ gcc -o module module1.o module2.o -ltrace
 ```
 
 OBS: if you would like to test without installing, make sure to run the following command in your terminal:
