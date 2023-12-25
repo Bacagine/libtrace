@@ -2,13 +2,16 @@
 
 Copyright (C) 2023 Gustavo Bacagine <gustavo.bacagine@protonmail.com>
 
-trace 2023-11-30
+libtrace 2023-12-25
+Changed the values of debug levels
+
+libtrace 2023-11-30
 Changed the name of the library and the source files
 
-trace 2023-10-18
+libtrace 2023-10-18
 Changed the name of macros used in comparison of debug level
 
-trace 2023-10-17
+ligbrace 2023-10-17
 
 Changed the name of macros, functions and variables
 
@@ -17,7 +20,7 @@ Add new macros:
  vTraceBegin
  vTraceEnd
 
-trace 2023-09-22
+libtrace 2023-09-22
 
 Add the make scripts and the following scripts: 
  install.sh,

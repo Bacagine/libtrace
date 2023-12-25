@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 
   vSetLogLevel(iGetLogLevel());
 
-  if(giDebugLevel < 0)
+  if(giDebugLevel < 1)
   {
     fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
 
@@ -257,7 +257,7 @@ int main(int argc, char **argv)
   
   vSetLogLevel(iGetLogLevel());
 
-  if(giDebugLevel < 0)
+  if(giDebugLevel < 1)
   {
     fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
 
@@ -328,7 +328,7 @@ int main(int argc, char **argv)
 
   vSetLogLevel(iGetLogLevel());
 
-  if(giDebugLevel < 0)
+  if(giDebugLevel < 1)
   {
     fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
 
@@ -399,7 +399,7 @@ int main(int argc, char **argv)
 
   vSetLogLevel(iGetLogLevel());
 
-  if(giDebugLevel < 0)
+  if(giDebugLevel < 1)
   {
     fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
 
@@ -451,7 +451,7 @@ int main(int argc, char **argv, char **envp)
 
   vSetLogLevel(iGetLogLevel());
 
-  if(giDebugLevel < 0)
+  if(giDebugLevel < 1)
   {
     fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
 
@@ -537,7 +537,7 @@ int main(int argc, char **argv)
 
   vSetLogLevel(iGetLogLevel());
 
-  if(giDebugLevel < 0)
+  if(giDebugLevel < 1)
   {
     fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
 

@@ -10,7 +10,7 @@
 
 char gszConfFileName[256];
 char gszLogFileName[256];
-DebugLevel giDebugLevel = 0;
+int giDebugLevel = 1;
 bool gbColoredLogLevel = false;
 
 void vSetConfFileName(const char *kszConfFileName)
@@ -42,12 +42,12 @@ void vSetColoredLogLevel(bool bColored)
   gbColoredLogLevel = bColored;
 }
 
-void vSetLogLevel(DebugLevel usiDebugLevel)
+void vSetLogLevel(const int kiDebugLevel)
 {
-  giDebugLevel = usiDebugLevel;
+  giDebugLevel = kiDebugLevel;
 }
 
-void _vTrace(DebugLevel usiDebugLevel,
+void _vTrace(const int kiDebugLevel,
              const char *kpszModuleName,
              const int kiLine, 
              const char *kpszFmt, ...)
@@ -80,7 +80,7 @@ void _vTrace(DebugLevel usiDebugLevel,
                                                                         kiLine
   );
 
-  switch(usiDebugLevel)
+  switch(kiDebugLevel)
   {
     case INFO_LEVEL:
       if(gbColoredLogLevel)
@@ -89,9 +89,9 @@ void _vTrace(DebugLevel usiDebugLevel,
         
         memset(szLogLevel, 0, sizeof(szLogLevel));
         
-        strcat(szLogLevel, kszLogLevelColorInit[INFO_LEVEL]);
-        strcat(szLogLevel, kszLogLevel[INFO_LEVEL]);
-        strcat(szLogLevel, kszLogLevelColorEnd[INFO_LEVEL]);
+        strcat(szLogLevel, kszLogLevelColorInit[INFO_LEVEL-1]);
+        strcat(szLogLevel, kszLogLevel[INFO_LEVEL-1]);
+        strcat(szLogLevel, kszLogLevelColorEnd[INFO_LEVEL-1]);
       
         strcat(szDbg, " [");
         strcat(szDbg, szLogLevel);
@@ -105,7 +105,7 @@ void _vTrace(DebugLevel usiDebugLevel,
       }
       
       strcat(szDbg, " [");
-      strcat(szDbg, kszLogLevel[INFO_LEVEL]);
+      strcat(szDbg, kszLogLevel[INFO_LEVEL-1]);
       strcat(szDbg, "] ");
 
       strcat(szDbg, kpszFmt);
@@ -120,9 +120,9 @@ void _vTrace(DebugLevel usiDebugLevel,
         
         memset(szLogLevel, 0, sizeof(szLogLevel));
         
-        strcat(szLogLevel, kszLogLevelColorInit[WARNING_LEVEL]);
-        strcat(szLogLevel, kszLogLevel[WARNING_LEVEL]);
-        strcat(szLogLevel, kszLogLevelColorEnd[WARNING_LEVEL]);
+        strcat(szLogLevel, kszLogLevelColorInit[WARNING_LEVEL-1]);
+        strcat(szLogLevel, kszLogLevel[WARNING_LEVEL-1]);
+        strcat(szLogLevel, kszLogLevelColorEnd[WARNING_LEVEL-1]);
    
         strcat(szDbg, " [");     
         strcat(szDbg, szLogLevel);
@@ -136,7 +136,7 @@ void _vTrace(DebugLevel usiDebugLevel,
       }
 
       strcat(szDbg, " [");
-      strcat(szDbg, kszLogLevel[WARNING_LEVEL]);
+      strcat(szDbg, kszLogLevel[WARNING_LEVEL-1]);
       strcat(szDbg, "] ");
 
       strcat(szDbg, kpszFmt);
@@ -151,9 +151,9 @@ void _vTrace(DebugLevel usiDebugLevel,
         
         memset(szLogLevel, 0, sizeof(szLogLevel));
         
-        strcat(szLogLevel, kszLogLevelColorInit[ERROR_LEVEL]);
-        strcat(szLogLevel, kszLogLevel[ERROR_LEVEL]);
-        strcat(szLogLevel, kszLogLevelColorEnd[ERROR_LEVEL]);
+        strcat(szLogLevel, kszLogLevelColorInit[ERROR_LEVEL-1]);
+        strcat(szLogLevel, kszLogLevel[ERROR_LEVEL-1]);
+        strcat(szLogLevel, kszLogLevelColorEnd[ERROR_LEVEL-1]);
 
         strcat(szDbg, " [");
         strcat(szDbg, szLogLevel);
@@ -167,7 +167,7 @@ void _vTrace(DebugLevel usiDebugLevel,
       }
 
       strcat(szDbg, " [");
-      strcat(szDbg, kszLogLevel[ERROR_LEVEL]);
+      strcat(szDbg, kszLogLevel[ERROR_LEVEL-1]);
       strcat(szDbg, "] ");
 
       strcat(szDbg, kpszFmt);
@@ -182,9 +182,9 @@ void _vTrace(DebugLevel usiDebugLevel,
         
         memset(szLogLevel, 0, sizeof(szLogLevel));
         
-        strcat(szLogLevel, kszLogLevelColorInit[FATAL_LEVEL]);
-        strcat(szLogLevel, kszLogLevel[FATAL_LEVEL]);
-        strcat(szLogLevel, kszLogLevelColorEnd[FATAL_LEVEL]);
+        strcat(szLogLevel, kszLogLevelColorInit[FATAL_LEVEL-1]);
+        strcat(szLogLevel, kszLogLevel[FATAL_LEVEL-1]);
+        strcat(szLogLevel, kszLogLevelColorEnd[FATAL_LEVEL-1]);
 
         strcat(szDbg, " [");
         strcat(szDbg, szLogLevel);
@@ -198,7 +198,7 @@ void _vTrace(DebugLevel usiDebugLevel,
       }
 
       strcat(szDbg, " [");
-      strcat(szDbg, kszLogLevel[FATAL_LEVEL]);
+      strcat(szDbg, kszLogLevel[FATAL_LEVEL-1]);
       strcat(szDbg, "] ");
 
       strcat(szDbg, kpszFmt);
@@ -213,9 +213,9 @@ void _vTrace(DebugLevel usiDebugLevel,
         
         memset(szLogLevel, 0, sizeof(szLogLevel));
         
-        strcat(szLogLevel, kszLogLevelColorInit[DEBUG_LEVEL]);
-        strcat(szLogLevel, kszLogLevel[DEBUG_LEVEL]);
-        strcat(szLogLevel, kszLogLevelColorEnd[DEBUG_LEVEL]);
+        strcat(szLogLevel, kszLogLevelColorInit[DEBUG_LEVEL-1]);
+        strcat(szLogLevel, kszLogLevel[DEBUG_LEVEL-1]);
+        strcat(szLogLevel, kszLogLevelColorEnd[DEBUG_LEVEL-1]);
 
         strcat(szDbg, " [");
         strcat(szDbg, szLogLevel);
@@ -229,7 +229,7 @@ void _vTrace(DebugLevel usiDebugLevel,
       }
 
       strcat(szDbg, " [");
-      strcat(szDbg, kszLogLevel[DEBUG_LEVEL]);
+      strcat(szDbg, kszLogLevel[DEBUG_LEVEL-1]);
       strcat(szDbg, "] ");
 
       strcat(szDbg, kpszFmt);
@@ -244,9 +244,9 @@ void _vTrace(DebugLevel usiDebugLevel,
         
         memset(szLogLevel, 0, sizeof(szLogLevel));
         
-        strcat(szLogLevel, kszLogLevelColorInit[TRACE_LEVEL]);
-        strcat(szLogLevel, kszLogLevel[TRACE_LEVEL]);
-        strcat(szLogLevel, kszLogLevelColorEnd[TRACE_LEVEL]);
+        strcat(szLogLevel, kszLogLevelColorInit[TRACE_LEVEL-1]);
+        strcat(szLogLevel, kszLogLevel[TRACE_LEVEL-1]);
+        strcat(szLogLevel, kszLogLevelColorEnd[TRACE_LEVEL-1]);
 
         strcat(szDbg, " [");
         strcat(szDbg, szLogLevel);
@@ -260,7 +260,7 @@ void _vTrace(DebugLevel usiDebugLevel,
       }
 
       strcat(szDbg, " [");
-      strcat(szDbg, kszLogLevel[TRACE_LEVEL]);
+      strcat(szDbg, kszLogLevel[TRACE_LEVEL-1]);
       strcat(szDbg, "] ");
       
       strcat(szDbg, kpszFmt);

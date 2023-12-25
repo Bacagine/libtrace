@@ -18,12 +18,12 @@
 #include <time.h>
 #include <errno.h>
 
-#define INFO_LEVEL    0 /* Normal messages                                      */
-#define WARNING_LEVEL 1 /* Warning alert messages                               */
-#define ERROR_LEVEL   2 /* Error messages                                       */
-#define FATAL_LEVEL   3 /* Fatal error messages                                 */
-#define DEBUG_LEVEL   4 /* Messages with more information about the source code */
-#define TRACE_LEVEL   5 /* Show all messages in trace                             */
+#define INFO_LEVEL    1 /* Normal messages                                      */
+#define WARNING_LEVEL 2 /* Warning alert messages                               */
+#define ERROR_LEVEL   3 /* Error messages                                       */
+#define FATAL_LEVEL   4 /* Fatal error messages                                 */
+#define DEBUG_LEVEL   5 /* Messages with more information about the source code */
+#define TRACE_LEVEL   6 /* Show all messages in trace                           */
 
 /**
  * Example of use:
@@ -80,8 +80,6 @@
 #define vTraceBegin() if(INFO_DETAILS) _vTrace(INFO_LEVEL, __FILE__, __LINE__, "%s - begin", __func__)
 #define vTraceEnd()   if(INFO_DETAILS) _vTrace(INFO_LEVEL, __FILE__, __LINE__, "%s - end", __func__)
 
-typedef int DebugLevel;
-
 static const char *kszLogLevel[] = {
   "INFO", "WARNING", "ERROR", "FATAL", "DEBUG", "TRACE"
 };
@@ -110,9 +108,9 @@ extern char gszLogFileName[256];
 
 /**
  * Receive the level of debug from .conf 
- * file, the default is 0 (INFO_LEVEL)
+ * file, the default is 1 (INFO_LEVEL)
  */
-extern DebugLevel giDebugLevel;
+extern int giDebugLevel;
 
 /**
  * Receive if the trace level tag is colored 
@@ -140,13 +138,13 @@ void vSetColoredLogLevel(bool bColored);
 /**
  * Set the value of giDebugLevel
  */
-void vSetLogLevel(DebugLevel usiDebugLevel);
+void vSetLogLevel(const int kiDebugLevel);
 
 /**
  * Get the trace level from file.
  * 
  * return values:
- * 0 - 6 = Log Level
+ * 1 - 6 = Log Level
  * -1 if can't open the file.
  * -2 if LOG_LEVEL is empty in file
  * -3 if don't found LOG_LEVEL variable in file
@@ -170,7 +168,7 @@ int iGetColoredLogLevel(void);
 /**
  * Print a trace message with the trace level between [].
  */
-void _vTrace(const DebugLevel usiDebugLevel,
+void _vTrace(const int kiDebugLevel,
              const char *kpszModuleName,
              const int kiLine,
              const char *kpszFmt, ...);

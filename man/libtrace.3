@@ -1,6 +1,6 @@
-.TH trace 1
+.TH libtrace 1
 .SH NAME
-trace \- a Debugging C Library
+libtrace \- a Debugging C Library
 
 .SH LIBRARY
 Debugging C library
@@ -10,12 +10,12 @@ Debugging C library
 .nf
 .B #include <trace/trace.h>
 .PP
-.B #define\ INFO_LEVEL\t\t    0\ /*\ Normal\ messages\t\t\t\t\t\t\t\ \ \                          */
-.B #define\ WARNING_LEVEL\t 1\ /*\ Warning\ alert\ messages\t\t\t\t\t\t\ \ \                      */
-.B #define\ ERROR_LEVEL\t\t   2\ /*\ Error\ messages\t\t\t\t\t\t\t\ \ \                           */
-.B #define\ FATAL_LEVEL\t\t   3\ /*\ Fatal\ error\ messages\t\t\t\t\t\t\ \ \                      */
-.B #define\ DEBUG_LEVEL\t\t   4\ /*\ Messages\ with\ more\ information\ about\ the\ source\ code\ */
-.B #define\ TRACE_LEVEL\t\t   5\ /*\ Show\ all\ messages\ in\ trace\t\t\t\t\t\ \ \                  */
+.B #define\ INFO_LEVEL\t\t    1\ /*\ Normal\ messages\t\t\t\t\t\t\t\ \ \                          */
+.B #define\ WARNING_LEVEL\t 2\ /*\ Warning\ alert\ messages\t\t\t\t\t\t\ \ \                      */
+.B #define\ ERROR_LEVEL\t\t   3\ /*\ Error\ messages\t\t\t\t\t\t\t\ \ \                           */
+.B #define\ FATAL_LEVEL\t\t   4\ /*\ Fatal\ error\ messages\t\t\t\t\t\t\ \ \                      */
+.B #define\ DEBUG_LEVEL\t\t   5\ /*\ Messages\ with\ more\ information\ about\ the\ source\ code\ */
+.B #define\ TRACE_LEVEL\t\t   6\ /*\ Show\ all\ messages\ in\ trace\t\t\t\t\t\ \ \                */
 .B 
 
 .B #define\ INFO_LEVEL_LOG_LEVEL\t\    giDebugLevel\ >=\ INFO_LEVEL
@@ -34,10 +34,10 @@ Debugging C library
 .B void\ vSetConfFileName(const\ char\ *kszConfFile)
 .B void\ vSetLogFileName(const\ char\ *kszLogFileName)
 .B void\ vSetColoredLogLevel(bool\ bColored)
-.B void\ vSetLogLevel(DebugLevel\ usiDebugLevel)
+.B void\ vSetLogLevel(const\ int\ kiDebugLevel)
 .B int\ iGetLogLevel(void)
 .B int\ iGetColoredLogLevel(void)
-.B void\ _vTrace(const\ DebugLevel\ usiDebugLevel,
+.B void\ _vTrace(const\ int\ kiDebugLevel,
 .B\t\t\t\ \         const\ char\ *kpszModuleName,
 .B\t\t\t\ \         const\ int\ kiLine,
 .B\t\t\t\ \         const\ char\ *kpszFmt,\ ...)

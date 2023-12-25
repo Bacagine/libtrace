@@ -18,7 +18,7 @@ trace
 ├── install.sh
 ├── trace.conf
 ├── man
-│   └── trace.1
+│   └── libtrace.3
 ├── mk
 ├── mkall
 ├── mkclean
@@ -54,7 +54,7 @@ README.md.....: The README of github
 trace.h.......: Header file of the library
 install.sh....: Installation script
 trace.conf....: A .conf example file to use the trace library in your C programs
-trace.1.......: A man page of the library and your functions
+libtrace.3....: A man page of the library and your functions
 mk............: A make script
 mkall.........: make all script
 mkclean.......: make clean script
