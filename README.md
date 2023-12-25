@@ -11,20 +11,20 @@ To better understand my codes, read the README.md at [this link](https://github.
 
 ## Log Levels
 
-- INFO_LEVEL    (0): Normal messages
-- WARNING_LEVEL (1): Alert messages
-- ERROR_LEVEL   (2): Errors that not cause the interruption of program
-- FATAL_LEVEL   (3): Erros that cause the interruption of program
-- DEBUG_LEVEL   (4): Detailed messages intended for the programmer
-- TRACE_LEVEL   (5): Messages more detailed than DEBUG_LEVEL level. Show all trace level messages
+- INFO_LEVEL    (1): Normal messages
+- WARNING_LEVEL (2): Alert messages
+- ERROR_LEVEL   (3): Errors that not cause the interruption of program
+- FATAL_LEVEL   (4): Erros that cause the interruption of program
+- DEBUG_LEVEL   (5): Detailed messages intended for the programmer
+- TRACE_LEVEL   (6): Messages more detailed than DEBUG_LEVEL level. Show all trace level messages
 
 ## Configuration file
 
 Your application needs a .conf file, in this file you add the follow contents:
 
 ```shell
-# 0 to 5
-LOG_LEVEL = 5
+# 1 to 6
+LOG_LEVEL = 6
 
 # true or false
 COLORED_LOG_LEVEL = false
