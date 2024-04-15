@@ -1,4 +1,4 @@
-make distclean
+make distclean LINUX=1
 
 gunzip ./man/trace.1.gz
 #gunzip ./doc/*.gz

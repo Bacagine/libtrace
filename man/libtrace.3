@@ -1,4 +1,4 @@
-.TH libtrace 1
+.TH libtrace 3
 .SH NAME
 libtrace \- a Debugging C Library
 
@@ -10,42 +10,36 @@ Debugging C library
 .nf
 .B #include <trace/trace.h>
 .PP
-.B #define\ INFO_LEVEL\t\t    1\ /*\ Normal\ messages\t\t\t\t\t\t\t\ \ \                          */
-.B #define\ WARNING_LEVEL\t 2\ /*\ Warning\ alert\ messages\t\t\t\t\t\t\ \ \                      */
-.B #define\ ERROR_LEVEL\t\t   3\ /*\ Error\ messages\t\t\t\t\t\t\t\ \ \                           */
-.B #define\ FATAL_LEVEL\t\t   4\ /*\ Fatal\ error\ messages\t\t\t\t\t\t\ \ \                      */
-.B #define\ DEBUG_LEVEL\t\t   5\ /*\ Messages\ with\ more\ information\ about\ the\ source\ code\ */
-.B #define\ TRACE_LEVEL\t\t   6\ /*\ Show\ all\ messages\ in\ trace\t\t\t\t\t\ \ \                */
+.B #define\ INFO_LEVEL\ \ \ \ 1\ //\ Normal\ messages
+.B #define\ WARNING_LEVEL 2\ //\ Warning\ alert\ messages
+.B #define\ ERROR_LEVEL\ \ \ 3\ //\ Error\ messages
+.B #define\ FATAL_LEVEL\ \ \ 4\ //\ Fatal\ error\ messages
+.B #define\ DEBUG_LEVEL\ \ \ 5\ //\ Messages\ with\ more\ information\ about\ the\ source\ code
+.B #define\ TRACE_LEVEL\ \ \ 6\ //\ Show\ all\ messages\ in\ trace
 .B 
 
-.B #define\ INFO_LEVEL_LOG_LEVEL\t\    giDebugLevel\ >=\ INFO_LEVEL
-.B #define\ WARNING_LEVEL_LOG_LEVEL\ giDebugLevel\ >=\ WARNING_LEVEL
-.B #define\ ERROR_LEVEL_LOG_LEVEL\t\   giDebugLevel\ >=\ ERROR_LEVEL
-.B #define\ FATAL_LEVEL_LOG_LEVEL\t\   giDebugLevel\ >=\ FATAL_LEVEL
-.B #define\ DEBUG_LEVEL_LOG_LEVEL\t\   giDebugLevel\ >=\ DEBUG_LEVEL
-.B #define\ TRACE_LEVEL_LOG_LEVEL\t\   giDebugLevel\ >=\ TRACE_LEVEL
+.B #define\ INFO_DETAILS\ \ \ \ giDebugLevel\ >=\ INFO_LEVEL
+.B #define\ WARNING_DETAILS\ giDebugLevel\ >=\ WARNING_LEVEL
+.B #define\ ERROR_DETAILS\ \ \ giDebugLevel\ >=\ ERROR_LEVEL
+.B #define\ FATAL_DETAILS\ \ \ giDebugLevel\ >=\ FATAL_LEVEL
+.B #define\ DEBUG_DETAILS\ \ \ giDebugLevel\ >=\ DEBUG_LEVEL
+.B #define\ TRACE_DETAILS\ \ \ giDebugLevel\ >=\ TRACE_LEVEL
 .B
 
-.B extern\ char\ gszConfFileName[256]
-.B extern\ char\ gszLogFileName[256]
-.B extern\ DebugLevel\ giDebugLevel
-.B extern\ bool\ gbColoredLogLevel
+.B extern\ char\ gszTrace[256]
+.B extern\ int\ giDebugLevel
  
-.B void\ vSetConfFileName(const\ char\ *kszConfFile)
-.B void\ vSetLogFileName(const\ char\ *kszLogFileName)
-.B void\ vSetColoredLogLevel(bool\ bColored)
-.B void\ vSetLogLevel(const\ int\ kiDebugLevel)
+.B void\ vSetTraceFileName(const\ char\ *kszLogFileName)
+.B void\ vSetDebugLevel(const\ int\ kiDebugLevel)
 .B int\ iGetLogLevel(void)
-.B int\ iGetColoredLogLevel(void)
-.B void\ _vTrace(const\ int\ kiDebugLevel,
-.B\t\t\t\ \         const\ char\ *kpszModuleName,
+.B void\ _vTrace(const\ char\ *kpszModuleName,
 .B\t\t\t\ \         const\ int\ kiLine,
 .B\t\t\t\ \         const\ char\ *kpszFmt,\ ...)
 
 .SH DESCRIPTION
 This is a Debug C Library developed by Gustavo Bacagine. It is used in personal Bacagine C programs, but you can use this library in your programs too.
 
-This is a free software licensed under the terms of the GPL3. You can should have received the copy of GLP3 license, if you don't have a copy, get the license at this link: <https://www.gnu.org/licenses/gpl-3.0.html>
+This is a free software
 
 .SH USAGE\ EXAMPLES
 You can see a usage examples of how to use this library at the github of the project at this link: <https://github.com/Bacagine/trace>

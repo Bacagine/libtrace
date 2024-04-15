@@ -4,19 +4,19 @@ trace
 ├── AUTHORS
 ├── ChangeLog
 ├── INSTALL
-├── LICENSE
 ├── Makefile
 ├── NEWS
 ├── README
 ├── README.md
 ├── doc
-│   └── img
-│       └── trace.png
+│   ├── img
+│   │   └── trace.png
+│   ├── libtrace-user-guide.docx
+│   └── libtrace-user-guide.pdf
 ├── include
 │   └── trace
 │       └── trace.h
 ├── install.sh
-├── trace.conf
 ├── man
 │   └── libtrace.3
 ├── mk
@@ -32,13 +32,13 @@ trace
 ├── src
 │   └── trace.c
 ├── tests
-│   ├── colored.c
 │   ├── debug.c
-│   ├── hello_log.c
+│   ├── hello_trace.c
 │   ├── module1.c
 │   ├── module2.c
-│   ├── trace.c
+│   ├── trace_function.c
 │   └── trace_level.c
+├── trace.conf
 └── uninstall.sh
 
 8 directories, 32 files
@@ -46,7 +46,6 @@ trace
 AUTHORS.......: The name and email of project author
 ChangeLog.....: Changelog of project
 INSTALL.......: Installation guide
-LICENSE.......: License of software
 Makefile......: Makefile of the project
 NEWS..........: File content the news about the project
 README........: This file containing a explanation about the files of project
@@ -67,4 +66,5 @@ mkuninstall...: make uninstall script
 remove_logs.sh: script to remove all .log files in current directory
 trace.c.........: C source file of the library
 uninstall.sh..: Uninstall script of the software
+libtrace-user-guide.*: Documentation of the library
 

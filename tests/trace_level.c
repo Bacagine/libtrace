@@ -11,63 +11,47 @@
 
 #define UNUSED(X) (void) X
 
-int main(int argc, char **argv, char **envp)
-{
+int main(int argc, char **argv, char **envp) {
   int ii;
   
-  UNUSED(gbColoredLogLevel);
-  UNUSED(gszLogFileName);
-  UNUSED(gszConfFileName);
-  UNUSED(kszLogLevelColorEnd);
-  UNUSED(kszLogLevelColorInit);
-  UNUSED(kszLogLevel);
+  UNUSED(gszTrace);
 
-  vSetConfFileName("trace.conf");
+  vSetDebugLevel(TRACE_LEVEL);
 
-  vSetLogLevel(iGetLogLevel());
-
-  if(giDebugLevel < 1)
-  {
+  if ( giDebugLevel < 1 ) {
     fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
-
     exit(EXIT_FAILURE);
   }
   
-  vSetLogFileName("trace_level.log");
+  vSetTraceFileName("trace_level.log");
 
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("start %s function", __func__);
-    vTraceInfo("INFO Message"      );
+  if ( INFO_DETAILS ) {
+    vTrace("begin %s function", __func__);
+    vTrace("INFO Message"      );
   }
 
-  if(WARNING_DETAILS) vTraceWarning("WARNING Message");
-  if(ERROR_DETAILS  ) vTraceError("ERROR Message"    );
-  if(FATAL_DETAILS  ) vTraceFatal("FATAL Message"    );
+  if ( WARNING_DETAILS ) vTrace("WARNING Message");
+  if ( ERROR_DETAILS   ) vTrace("ERROR Message"    );
+  if ( FATAL_DETAILS   ) vTrace("FATAL Message"    );
   
-  if(DEBUG_DETAILS)
-  {
-    vTraceDebug("argc = %d", argc);
-    for(ii = 0; ii < argc; ii++)
-    {
-      vTraceDebug("argv[%d] = %s", ii, argv[ii]);
+  if ( DEBUG_DETAILS ) {
+    vTrace("argc = %d", argc);
+    for ( ii = 0; ii < argc; ii++ ) {
+      vTrace("argv[%d] = %s", ii, argv[ii]);
     }
 
-    for(ii = 0; envp[ii] != NULL; ii++)
-    {
-      vTraceDebug("envp[%d] = %s", ii, envp[ii]);
+    for ( ii = 0; envp[ii] != NULL; ii++ ) {
+      vTrace("envp[%d] = %s", ii, envp[ii]);
     }
   }
   
-  if(TRACE_DETAILS)
-  {
-    vTraceAll("TRACE Message");
-    vTraceAll("%s(argc=%p, argv=%p, envp=%p)", __func__, &argc, &argv, &envp);
+  if ( TRACE_DETAILS ) {
+    vTrace("TRACE Message");
+    vTrace("%s(argc=%p, argv=%p, envp=%p)", __func__, &argc, &argv, &envp);
   }
 
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("End %s function", __func__);
+  if ( INFO_DETAILS ) {
+    vTrace("end %s function", __func__);
   }
 
   return 0;

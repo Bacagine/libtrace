@@ -26,7 +26,17 @@ CFLAGS     = -I $(INCDIR) -Wall -Wextra
 DEBUGFLAGS = -g -O0 -DDEBUG_COMPILATION
 CC         = gcc
 
-ifdef DEBUG_COMPILATION
+ifdef LINUX
+	CFLAGS += -DLINUX
+	LDFLAGS += -DLINUX
+endif
+
+ifdef _WIN32
+	CFLAGS += -D_WIN32
+	LDFLAGS += -D_WIN32
+endif
+
+ifdef DEBUG
 	CFLAGS += $(DEBUGFLAGS) 
 	LDFLAGS += $(DEBUGFLAGS)
 else
@@ -62,7 +72,6 @@ test: all $(BINDIR)
 	$(CC) -o $(BINDIR)/trace_function $(TESTDIR)/trace_function.c  $(CFLAGS) $(LDFLAGS) -ltrace
 	$(CC) -o $(BINDIR)/trace_level $(TESTDIR)/trace_level.c  $(CFLAGS) $(LDFLAGS) -ltrace
 	$(CC) -o $(BINDIR)/debug $(TESTDIR)/debug.c  $(CFLAGS) $(LDFLAGS) -ltrace
-	$(CC) -o $(BINDIR)/colored $(TESTDIR)/colored.c  $(CFLAGS) $(LDFLAGS) -ltrace
 	$(CC)	-c $(TESTDIR)/module1.c -o $(OBJDIR)/module1.o $(CFLAGS) $(LDFLAGS) -ltrace
 	$(CC)	-c $(TESTDIR)/module2.c -o $(OBJDIR)/module2.o $(CFLAGS) $(LDFLAGS) -ltrace
 	$(CC) -o $(BINDIR)/module $(OBJDIR)/module1.o $(OBJDIR)/module2.o $(CFLAGS) $(LDFLAGS) -ltrace

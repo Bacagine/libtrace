@@ -14,170 +14,118 @@
 
 #define UNUSED(X) (void) X
 
-/**
- * Structure that 
- * represents a person
- */
-typedef struct Person
-{
+typedef struct STRUCT_PERSON {
   char szName[64];
   uint8_t uAge;
-} Person, *PPerson;
+} STRUCT_PERSON, *PSTRUCT_PERSON;
 
-static void vInitPerson(PPerson *ppstPerson)
-{
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("start %s function", __func__);
-    vTraceInfo("Setting the default values in members of struct Person");
+static void vInitSTRUCT_PERSON(PSTRUCT_PERSON *ppstPerson) {
+  if ( INFO_DETAILS ) {
+    vTrace("begin %s function", __func__);
+    vTrace("Setting the default values in members of struct STRUCT_PERSON");
   }
   
-  memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge));
-  (*ppstPerson)->uAge = 0;
+  memset((*ppstPerson), 0x00, sizeof(PSTRUCT_PERSON *));
   
-  if(DEBUG_DETAILS)
-  {
-    vTraceDebug("memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge))");
-    vTraceDebug("(*ppstPerson)->uAge = 0");
+  if ( DEBUG_DETAILS ) {
+    vTrace("memset((*ppstPerson), 0x00, sizeof(PSTRUCT_PERSON *))");
   }
 
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("end %s function", __func__);
+  if ( INFO_DETAILS ) {
+    vTrace("end %s function", __func__);
   }
 }
   
-static void vCreatePerson(PPerson *ppstPerson, const char *szName, const uint8_t uAge)
-{
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("start %s function", __func__);
-    vTraceInfo("create a new person");
+static void vCreateSTRUCT_PERSON(PSTRUCT_PERSON *ppstPerson, const char *szName, const uint8_t uAge) {
+  if ( INFO_DETAILS ) {
+    vTrace("begin %s function", __func__);
+    vTrace("create a new person");
   }
 
   strcpy((*ppstPerson)->szName, szName);
   (*ppstPerson)->uAge = uAge;
 
-  if(DEBUG_DETAILS)
-  {
-    vTraceDebug("Values of the member Person");
-    vTraceDebug("(*ppstPerson)->szName = %s", (*ppstPerson)->szName);
-    vTraceDebug("(*ppstPerson)->uAge = %d", (*ppstPerson)->uAge);
+  if ( DEBUG_DETAILS ) {
+    vTrace("Values of the member STRUCT_PERSON");
+    vTrace("(*ppstPerson)->szName = %s", (*ppstPerson)->szName);
+    vTrace("(*ppstPerson)->uAge = %d", (*ppstPerson)->uAge);
   }
 
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("Person created with succes");
-    vTraceInfo("end %s function", __func__);
+  if ( INFO_DETAILS ) {
+    vTrace("STRUCT_PERSON created with succes");
+    vTrace("end %s function", __func__);
   }
 }
 
-static void vShowPerson(PPerson pstPerson)
-{
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("start %s function", __func__);
-    vTraceInfo("Show Person");
-    vTraceInfo("Name: %s\n"
-             "Age.: %d\n", pstPerson->szName,
-                           pstPerson->uAge);
+static void vShowSTRUCT_PERSON(PSTRUCT_PERSON pstPerson) {
+  if ( INFO_DETAILS ) {
+    vTrace("begin %s function", __func__);
+    vTrace("Show STRUCT_PERSON");
+    vTrace("Name: %s\n"
+           "Age.: %d\n", pstPerson->szName,
+                         pstPerson->uAge);
   }
 
   printf("Name: %s\n"
          "Age.: %d\n", pstPerson->szName,
                        pstPerson->uAge);
 
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("end %s function", __func__);
-  }
+  if ( INFO_DETAILS ) vTraceEnd();
 }
 
-static void vDestroyPerson(PPerson *ppstPerson)
-{
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("start %s function", __func__);
-  }
+static void vDestroyPerson(PSTRUCT_PERSON *ppstPerson) {
+  if ( INFO_DETAILS ) vTraceBegin();
   
-  memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge));
-  (*ppstPerson)->uAge = 0;
+  memset((*ppstPerson), 0x00, sizeof(PSTRUCT_PERSON *));
   
-  if(DEBUG_DETAILS)
-  {
-    vTraceDebug("memset((*ppstPerson)->szName, 0, sizeof((*ppstPerson)->uAge))");
-    vTraceDebug("(*ppstPerson)->uAge = 0");
-    vTraceDebug("Freeing Person structure pointer");
+  if ( DEBUG_DETAILS ) {
+    vTrace("memset((*ppstPerson), 0x00, sizeof(PSTRUCT_PERSON *))");
+    vTrace("Freeing STRUCT_PERSON structure pointer");
   }
 
   free((*ppstPerson));
   (*ppstPerson) = NULL;
 
-  if(DEBUG_DETAILS)
-  {
-    vTraceDebug("free((*ppstPerson))");
-    vTraceDebug("(*ppstPerson) = NULL");
-    vTraceDebug("Person structure pointer free");
+  if ( DEBUG_DETAILS ) {
+    vTrace("free((*ppstPerson))");
+    vTrace("(*ppstPerson) = NULL");
+    vTrace("STRUCT_PERSON structure pointer free");
   }
 
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("end %s function", __func__);
-  }
+  if ( INFO_DETAILS ) vTraceEnd();
 }
 
-int main(int argc, char **argv)
-{
-  PPerson pstPerson = (PPerson) malloc(sizeof(Person));
-  
+int main(int argc, char **argv) {
+  PSTRUCT_PERSON pstPerson = (PSTRUCT_PERSON) malloc(sizeof(STRUCT_PERSON));
+
   UNUSED(argc);
   UNUSED(argv);
-  UNUSED(gbColoredLogLevel);
-  UNUSED(gszLogFileName);
-  UNUSED(gszConfFileName);
-  UNUSED(kszLogLevelColorEnd);
-  UNUSED(kszLogLevelColorInit);
-  UNUSED(kszLogLevel);
   
-  vSetConfFileName("trace.conf");
+  vSetTraceFileName("debug.log");
+  vSetDebugLevel(DEBUG_LEVEL);
   
-  vSetLogLevel(iGetLogLevel());
-
-  if(giDebugLevel < 1)
-  {
-    fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
-
-    exit(EXIT_FAILURE);
+  // Initial trace messages
+  if ( INFO_DETAILS ) {
+    vTrace("begin of function %s", __func__);
   }
   
-  vSetLogFileName("debug.log");
-  
-  /* Initial trace messages */
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("Start of function %s", __func__);
-  }
-  
-  if(pstPerson == NULL)
-  {
-    if(DEBUG_DETAILS)
-    {
-      vTraceDebug("E: out memory in allocation of pstPerson!");
+  if ( pstPerson == NULL ) {
+    if ( DEBUG_DETAILS ) {
+      vTrace("E: out memory in allocation of pstPerson!");
     }
   }
 
-  vInitPerson(&pstPerson);
+  vInitSTRUCT_PERSON(&pstPerson);
   
-  vCreatePerson(&pstPerson, "Gustavo Bacagine", 23);
+  vCreateSTRUCT_PERSON(&pstPerson, "Gustavo Bacagine", 23);
   
-  vShowPerson(pstPerson);
+  vShowSTRUCT_PERSON(pstPerson);
 
   vDestroyPerson(&pstPerson);
   
-  /* End trace messages */
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("End of function %s", __func__);
+  // End trace messages
+  if ( INFO_DETAILS ) {
+    vTrace("end of function %s", __func__);
   }
 
   return 0;

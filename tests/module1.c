@@ -14,56 +14,31 @@
 #define UNUSED(X) (void) X
 
 void vShowDebugLevel(void);
-void vShowColoredLogLevel(void);
-void vShowConfFileName(void);
-void vShowLogFileName(void);
+void vShowTraceFileName(void);
 
-int main(int argc, char **argv)
-{
-  int iColoredLogLevel;
- 
+int main(int argc, char **argv) {
   UNUSED(argc);
   UNUSED(argv);
-  UNUSED(kszLogLevelColorEnd);
-  UNUSED(kszLogLevelColorInit);
-  UNUSED(kszLogLevel);
  
-  vSetConfFileName("trace.conf");
+  vSetDebugLevel(TRACE_LEVEL);
 
-  vSetLogLevel(iGetLogLevel());
-
-  if(giDebugLevel < 1)
-  {
+  if ( giDebugLevel < 1 ) {
     fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
-
     exit(EXIT_FAILURE);
   }
   
-  iColoredLogLevel = iGetColoredLogLevel();
+  vSetTraceFileName("module.log"); 
   
-  if(iColoredLogLevel == 0 || iColoredLogLevel == 1)
-  {
-    vSetColoredLogLevel(iColoredLogLevel);
-  }
-  
-  vSetLogFileName("module.log"); 
-  
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("Start %s function", __func__);
-    vTraceInfo("Debug Level = %d", giDebugLevel);
-    vTraceInfo("Colored Log Level = %s", 
-      gbColoredLogLevel == true ? "true" : "false");
-    vTraceInfo("Configure file: %s", gszConfFileName);
-    vTraceInfo("Log file: %s", gszLogFileName);
+  if ( INFO_DETAILS ) {
+    vTrace("begin %s function", __func__);
+    vTrace("Debug Level = %d", giDebugLevel);
+    vTrace("Log file: %s", gszTrace);
   }
 
   vShowDebugLevel();
-  vShowColoredLogLevel();
-  vShowConfFileName();
-  vShowLogFileName();
+  vShowTraceFileName();
   
-  if(INFO_DETAILS) vTraceInfo("End %s funciton", __func__);
+  if(INFO_DETAILS) vTrace("end %s funciton", __func__);
 
   return 0;
 }

@@ -13,32 +13,23 @@
 
 #define UNUSED(X) (void) X
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   UNUSED(argc);
   UNUSED(argv);
-  UNUSED(kszLogLevelColorEnd);
-  UNUSED(kszLogLevelColorInit);
-  UNUSED(kszLogLevel);
   
-  vSetConfFileName("trace.conf");
+  vSetDebugLevel(INFO_DETAILS);
 
-  vSetLogLevel(iGetLogLevel());
-
-  if(giDebugLevel < 1)
-  {
+  if ( giDebugLevel < 1 ) {
     fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
-
     exit(EXIT_FAILURE);
   }
   
-  vSetLogFileName("hello_trace.log");
+  vSetTraceFileName("hello_trace.log");
 
-  if(INFO_DETAILS)
-  {
-    vTraceInfo("%s - begin", __func__);
-    vTraceInfo("Hello World!!!");
-    vTraceInfo("%s - end", __func__);
+  if ( INFO_DETAILS ) {
+    vTrace("%s - begin", __func__);
+    vTrace("Hello World!!!");
+    vTrace("%s - end", __func__);
   }
 
   return 0;

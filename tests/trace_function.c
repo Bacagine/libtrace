@@ -1,5 +1,5 @@
 /**
- * trace.c
+ * trace_function.c
  *
  * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
  * 
@@ -17,51 +17,36 @@
 
 #define UNUSED(X) (void) X
 
-void vMyFunc(void)
-{
-  vTraceBegin();
+void vMyFunc(void) {
+  if ( INFO_DETAILS ) vTraceBegin();
   
-  vTrace(INFO_LEVEL, "INFO MESSAGE");
-  vTrace(WARNING_LEVEL, "WARNING MESSAGE");
-  vTrace(ERROR_LEVEL, "ERROR MESSAGE");
-  vTrace(FATAL_LEVEL, "FATAL MESSAGE");
-  vTrace(DEBUG_LEVEL, "DEBUG MESSAGE");
-  vTrace(TRACE_LEVEL, "TRACE MESSAGE");
+  if ( INFO_DETAILS ) vTrace("INFO MESSAGE");
+  if ( WARNING_DETAILS ) vTrace("WARNING MESSAGE");
+  if ( ERROR_DETAILS ) vTrace("ERROR MESSAGE");
+  if ( FATAL_DETAILS ) vTrace("FATAL MESSAGE");
+  if ( DEBUG_DETAILS ) vTrace("DEBUG MESSAGE");
+  if ( TRACE_DETAILS ) vTrace("TRACE MESSAGE");
 
-  vTraceEnd();
+  if ( INFO_DETAILS ) vTraceEnd();
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   UNUSED(argc);
   UNUSED(argv);
-  UNUSED(gbColoredLogLevel);
-  UNUSED(gszLogFileName);
-  UNUSED(gszConfFileName);
-  UNUSED(kszLogLevelColorEnd);
-  UNUSED(kszLogLevelColorInit);
-  UNUSED(kszLogLevel);
+  UNUSED(gszTrace);
 
-  vSetConfFileName("trace.conf");
+  vSetDebugLevel(TRACE_LEVEL);
 
-  vSetLogLevel(iGetLogLevel());
+  vSetTraceFileName("trace.log");
 
-  if(giDebugLevel < 1)
-  {
-    fprintf(stderr, "Error, giDebugLevel return value: %d!\n", giDebugLevel);
-
-    exit(EXIT_FAILURE);
+  if ( INFO_DETAILS ) {
+    vTraceBegin();
+    vTrace("Main Info Message :)");
   }
-  
-  vSetLogFileName("trace.log");
-
-  vTraceBegin();
-  
-  vTrace(INFO_LEVEL, "Main Info Message :)");
 
   vMyFunc();
 
-  vTraceEnd();
+  if ( INFO_DETAILS ) vTraceEnd();
 
   return 0;
 }
