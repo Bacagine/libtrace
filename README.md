@@ -1,7 +1,5 @@
 # libtrace
 
-![Colored Logger](doc/img/trace.png)
-
 My personal debug library for my C/C++ programs
 
 To better understand my codes, read the README.md at [this link](https://github.com/Bacagine/Bacagine)
@@ -17,18 +15,6 @@ To better understand my codes, read the README.md at [this link](https://github.
 - FATAL_LEVEL   (4): Erros that cause the interruption of program
 - DEBUG_LEVEL   (5): Detailed messages intended for the programmer
 - TRACE_LEVEL   (6): Messages more detailed than DEBUG_LEVEL level. Show all trace level messages
-
-## Configuration file
-
-Your application needs a .conf file, in this file you add the follow contents:
-
-```shell
-# 1 to 6
-LOG_LEVEL = 6
-
-# true or false
-COLORED_LOG_LEVEL = false
-```
 
 ## Build and Install
 ```
