@@ -9,8 +9,6 @@ trace
 ├── README
 ├── README.md
 ├── doc
-│   ├── img
-│   │   └── trace.png
 │   ├── libtrace-user-guide.docx
 │   └── libtrace-user-guide.pdf
 ├── include
@@ -38,10 +36,9 @@ trace
 │   ├── module2.c
 │   ├── trace_function.c
 │   └── trace_level.c
-├── trace.conf
 └── uninstall.sh
 
-8 directories, 32 files
+7 directories, 30 files
 
 AUTHORS.......: The name and email of project author
 ChangeLog.....: Changelog of project
@@ -52,7 +49,6 @@ README........: This file containing a explanation about the files of project
 README.md.....: The README of github
 trace.h.......: Header file of the library
 install.sh....: Installation script
-trace.conf....: A .conf example file to use the trace library in your C programs
 libtrace.3....: A man page of the library and your functions
 mk............: A make script
 mkall.........: make all script
