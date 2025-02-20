@@ -1,13 +1,11 @@
 /**
- * $Id:$
- * 
  * trace.c
  * 
- * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com>
+ * Written by Gustavo Bacagine <gustavo.bacagine@protonmail.com> in February 2025
  * 
  * Description: Debug module
  * 
- * Date: 18/10/2024
+ * Date: 20/02/2025
  */
 
 #include "trace.h"
