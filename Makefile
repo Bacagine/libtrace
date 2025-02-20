@@ -2,6 +2,7 @@
 CC = gcc
 CFLAGS = -Wall -fPIC
 LDFLAGS = -shared
+LDLIBS = -lz 
 LIBRARY = libtrace.so
 SRC_DIR = src
 INC_DIR = include
@@ -25,7 +26,7 @@ $(LIB_DIR):
 
 # Regra para gerar a biblioteca compartilhada
 $(LIBRARY): $(OBJ_FILES)
-	$(CC) $(LDFLAGS) -o $(LIB_DIR)/$@ $^
+	$(CC) $(LDFLAGS) $(LDLIBS) -o $(LIB_DIR)/$@ $^
 
 # Regra para compilar arquivos .c em .o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
