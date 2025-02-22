@@ -11,6 +11,13 @@ NOTE: You need Zlib to compile this library
 
 `sudo ./mkinstall`
 
+## Test
+After run mkall script, run the following commands:
+
+`$ mktest`
+
+`$ mkrun`
+
 ## Remove
 
 `./mkuninstall`

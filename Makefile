@@ -1,56 +1,50 @@
-# Variáveis
 CC = gcc
 CFLAGS = -Wall -fPIC
 LDFLAGS = -shared
 LDLIBS = -lz 
 LIBRARY = libtrace.so
-SRC_DIR = src
-INC_DIR = include
-OBJ_DIR = obj
+SRCDIR = src
+INCDIR = include
+OBJDIR = obj
 
-# Diretórios
-LIB_DIR = lib
+LIBDIR = lib
 
-# Arquivos de origem
-SRC_FILES = $(SRC_DIR)/trace.c
-OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRCFILES = $(SRCDIR)/trace.c
+OBJFILES = $(SRCFILES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-# Regras
-all: $(OBJ_DIR) $(LIB_DIR) $(LIBRARY)
+all: $(OBJDIR) $(LIBDIR) $(LIBRARY)
 
-$(OBJ_DIR):
+$(OBJDIR):
 	mkdir obj
 
-$(LIB_DIR):
+$(LIBDIR):
 	mkdir lib
 
-# Regra para gerar a biblioteca compartilhada
-$(LIBRARY): $(OBJ_FILES)
-	$(CC) $(LDFLAGS) $(LDLIBS) -o $(LIB_DIR)/$@ $^
+$(LIBRARY): $(OBJFILES)
+	$(CC) $(LDFLAGS) $(LDLIBS) -o $(LIBDIR)/$@ $^
 
-# Regra para compilar arquivos .c em .o
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
 
-# Limpeza
 clean:
-	rm -rf $(OBJ_DIR)/*.o $(LIB_DIR)/$(LIBRARY)
+	rm -rf $(OBJDIR)/*.o $(LIBDIR)/$(LIBRARY)
 
 distclean:
-	rm -rf $(OBJ_DIR) $(LIB_DIR)
+	rm -rf $(OBJDIR) $(LIBDIR)
+	rm -rf a.out
+	rm -rf test.log
 
-# Instalação (ajustar o destino conforme necessário)
+test:
+	$(CC)  $(CFLAGS) -I$(INCDIR) test/main.c -L lib -ltrace $(LDLIBS)
+run:
+	@./run
+
 install: $(LIBRARY)
 	cp $(LIB_DIR)/$(LIBRARY) /usr/local/lib/
 	cp $(INC_DIR)/trace.h /usr/local/include/
 
-# Desinstalação
 uninstall:
 	rm -f /usr/local/lib/$(LIBRARY)
 	rm -f /usr/local/include/trace.h
 
-# Verificação de dependências
-deps:
-	$(CC) -MM $(SRC_FILES) > $(OBJ_DIR)/dependencias.mk
-	include $(OBJ_DIR)/dependencias.mk
-
+.PHONY: all clean distclean test run install uninstall
